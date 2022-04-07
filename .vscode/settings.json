@@ -1,0 +1,19 @@
+{
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.codeActionsOnSave": {
+		"source.fixAll.prettier": true
+	},
+	"prettier.htmlWhitespaceSensitivity": "strict",
+	"prettier.trailingComma": "none",
+	"prettier.semi": false,
+	"prettier.useTabs": true,
+	"editor.formatOnSave": true,
+	"sass.disableUnitCompletion": false,
+	"[sass]": {
+		"editor.defaultFormatter": "syler.sass-indented"
+	},
+	"errorLens.delay": 650,
+	"errorLens.enableOnDiffView": true,
+	"errorLens.statusBarMessageType": "closestSeverity",
+	"editor.cursorStyle": "block-outline"
+}

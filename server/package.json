@@ -1,0 +1,37 @@
+{
+	"name": "server",
+	"version": "1.0.0",
+	"description": "Backend",
+	"author": "Arda Uzan <arda.uzan@protonmail.com> (https://github.com/ardauzan)",
+	"private": true,
+	"license": "UNLICENSED",
+	"scripts": {
+		"startDev": "cd ../client && yarn startDev",
+		"startProd": "cd ../client && yarn startProd",
+		"start-client": "cd ../client && yarn start-client",
+		"start-server": "cd ../client && yarn start-server"
+	},
+	"dependencies": {
+		"body-parser": "^1.19.2",
+		"express": "^4.17.3",
+		"morgan": "^1.10.0",
+		"multer": "^1.4.4"
+	},
+	"devDependencies": {
+		"eslint": "^8.12.0",
+		"eslint-config-prettier": "^8.5.0",
+		"nodemon": "^2.0.15"
+	},
+	"engines": {
+		"node": ">=16.10.0",
+		"yarn": ">=1.22.0"
+	},
+	"os": [
+		"darwin",
+		"linux"
+	],
+	"cpu": [
+		"x64",
+		"ia32"
+	]
+}

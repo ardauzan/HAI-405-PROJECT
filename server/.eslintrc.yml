@@ -1,0 +1,16 @@
+---
+root: true
+parserOptions:
+  sourceType: module
+  ecmaVersion: 12
+extends:
+  - "eslint:recommended"
+  - "prettier"
+env:
+  browser: false
+  node: true
+  es2021: true
+rules:
+  no-unused-vars:
+    - "error"
+    - argsIgnorePattern: "next"

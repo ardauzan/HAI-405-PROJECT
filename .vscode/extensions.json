@@ -1,0 +1,12 @@
+{
+	"recommendations": [
+		"esbenp.prettier-vscode",
+		"dbaeumer.vscode-eslint",
+		"eamodio.gitlens",
+		"syler.sass-indented",
+		"usernamehw.errorlens",
+		"davidanson.vscode-markdownlint",
+		"oderwat.indent-rainbow",
+		"aaron-bond.better-comments"
+	]
+}
