@@ -1,6 +1,11 @@
 import PropTypes from "prop-types"
+import { uploadImagesToBackend } from "../../utils"
 
-export default function FileSelectionView({ selectedFiles, setSelectedFiles }) {
+export default function FileSelectionView({
+	selectedFiles,
+	setSelectedFiles,
+	setFilesChosen
+}) {
 	const renderContent = () =>
 		selectedFiles.length >= 6 && selectedFiles.length <= 24 ? (
 			<>
@@ -26,13 +31,18 @@ export default function FileSelectionView({ selectedFiles, setSelectedFiles }) {
 				/>
 				{renderContent()}
 			</div>
+			<button
+				onClick={() => uploadImagesToBackend(selectedFiles, setFilesChosen)}
+				disabled={selectedFiles.length < 6 || selectedFiles.length > 24}
+			>
+				Upload!
+			</button>
 		</>
 	)
 }
 
 FileSelectionView.propTypes = {
 	selectedFiles: PropTypes.array.isRequired,
-	setSelectedFiles: PropTypes.func.isRequired
+	setSelectedFiles: PropTypes.func.isRequired,
+	setFilesChosen: PropTypes.func.isRequired
 }
-
-FileSelectionView.defaultProps = {}

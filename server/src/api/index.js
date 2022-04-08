@@ -1,5 +1,5 @@
 const express = require("express")
-const uploadfiles = require("./uploadfiles")
+const uploadimages = require("./uploadimages")
 
 const api = express.Router()
 
@@ -7,6 +7,6 @@ api.get("/", (req, res, next) => {
 	res.json(200)
 })
 
-api.use("/uploadfiles", uploadfiles)
+api.use("/uploadimages", uploadimages)
 
 module.exports = api

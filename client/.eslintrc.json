@@ -1,0 +1,28 @@
+{
+	"root": true,
+	"settings": {
+		"react": {
+			"version": "18.0"
+		}
+	},
+	"parserOptions": {
+		"sourceType": "module",
+		"ecmaFeatures": { "jsx": true }
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:react/jsx-runtime",
+		"plugin:react-hooks/recommended",
+		"plugin:jsx-a11y/strict",
+		"prettier"
+	],
+	"env": { "browser": true, "es2022": true },
+	"rules": {
+		"no-console": "warn",
+		"react-hooks/exhaustive-deps": [
+			"warn",
+			{ "additionalHooks": "(useRecoilCallback|useRecoilTransaction_UNSTABLE)" }
+		]
+	}
+}

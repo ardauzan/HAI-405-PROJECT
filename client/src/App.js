@@ -24,7 +24,7 @@ export default function App() {
 							<Route path="/game" element={<Game />} />
 							<Route path="/generator" element={<Generator />} />
 							<Route path="/" element={<Home />} />
-							<Route path="*" element={<Navigate to="/404" />} />
+							<Route path="/*" element={<Navigate to="/404" />} />
 						</Routes>
 					</Suspense>
 					<Footer />

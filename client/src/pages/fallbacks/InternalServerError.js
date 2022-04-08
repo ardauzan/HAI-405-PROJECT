@@ -1,14 +1,12 @@
 import styles from "./InternalServerError.module.sass"
 
+const { container, heading, description } = styles
+
 export default function InternalServerError() {
 	return (
-		<main className={styles.container}>
-			<article className={styles.content}>
-				<h1 className={styles.heading}>500 - Internal Server Error</h1>
-				<p className={styles.description}>
-					Internal error occured on the backend.
-				</p>
-			</article>
+		<main className={container}>
+			<h1 className={heading}>500 - Internal Server Error</h1>
+			<p className={description}>Internal error occured on the backend.</p>
 		</main>
 	)
 }

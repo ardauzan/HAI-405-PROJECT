@@ -1,12 +1,12 @@
 import styles from "./PageNotFound.module.sass"
 
+const { container, heading, description } = styles
+
 export default function PageNotFound() {
 	return (
-		<main className={styles.container}>
-			<article className={styles.content}>
-				<h1 className={styles.heading}>404 - Page Not Found</h1>
-				<p className={styles.description}> des</p>
-			</article>
+		<main className={container}>
+			<h1 className={heading}>404 - Page Not Found</h1>
+			<p className={description}> des</p>
 		</main>
 	)
 }

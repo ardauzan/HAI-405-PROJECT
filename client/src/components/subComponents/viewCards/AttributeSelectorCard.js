@@ -1,9 +1,9 @@
 import PropTypes from "prop-types"
-
 export default function AttributeSelectorCard({
 	possibleAttributes,
 	attributesSelectedForThisImage,
-	setAttributesSelectedForThisImage
+	setAttributesSelectedForThisImage,
+	setAddAttributeOpen
 }) {
 	const renderStringSelection = (v) => {
 		let tmpArr1 = []
@@ -67,37 +67,49 @@ export default function AttributeSelectorCard({
 			/>
 		</>
 	)
-	const renderContent = () =>
-		possibleAttributes.map((v, i) => {
-			switch (v.type) {
-				case "string":
-					return (
-						<div key={i}>
-							<h4>{v.name + " | (" + v.type + ")"}</h4>
-							{renderStringSelection(v)}
-						</div>
-					)
-				case "boolean":
-					return (
-						<div key={i}>
-							<h4>{v.name + " | (" + v.type + ")"}</h4>
-							{renderBooleanSelection(v, i)}
-						</div>
-					)
-				case "number":
-					return (
-						<div key={i}>
-							<h4>{v.name + " | (" + v.type + ")"}</h4>
-							{renderNumberSelection(v, i)}
-						</div>
-					)
-			}
-		})
+	const renderContent = () => (
+		<>
+			<h5>Chose from these attributes (leave empty for unset):</h5>
+			{possibleAttributes.map((v, i) => {
+				switch (v.type) {
+					case "string":
+						return (
+							<div key={i}>
+								<h4>{v.name + " | (" + v.type + ")"}</h4>
+								{renderStringSelection(v)}
+							</div>
+						)
+					case "boolean":
+						return (
+							<div key={i}>
+								<h4>{v.name + " | (" + v.type + ")"}</h4>
+								{renderBooleanSelection(v, i)}
+							</div>
+						)
+					case "number":
+						return (
+							<div key={i}>
+								<h4>{v.name + " | (" + v.type + ")"}</h4>
+								{renderNumberSelection(v, i)}
+							</div>
+						)
+				}
+			})}
+			<h5>Or add another one:</h5>
+			<button onClick={() => setAddAttributeOpen(true)}>Add attribute!</button>
+		</>
+	)
 	return <div className="attributeSelector">{renderContent()}</div>
 }
 
 AttributeSelectorCard.propTypes = {
 	possibleAttributes: PropTypes.array.isRequired,
-	attributesSelectedForThisImage: PropTypes.array.isRequired,
-	setAttributesSelectedForThisImage: PropTypes.func.isRequired
+	attributesSelectedForThisImage: PropTypes.object.isRequired,
+	setAttributesSelectedForThisImage: PropTypes.func.isRequired,
+	setAddAttributeOpen: PropTypes.func.isRequired,
+	addAttributeOpen: PropTypes.bool.isRequired,
+	attributes: PropTypes.array.isRequired,
+	setAttributes: PropTypes.func.isRequired,
+	setFilesChosen: PropTypes.func.isRequired,
+	setPossibleAttributes: PropTypes.func.isRequired
 }

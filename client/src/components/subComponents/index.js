@@ -1,3 +1,3 @@
-export * from "./cards"
+export * from "./viewCards"
 
 export * from "./shared"

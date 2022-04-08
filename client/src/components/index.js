@@ -1,3 +1,3 @@
-export * from "./base"
+export * from "./baseComponents"
 
-export * from "./views"
+export * from "./pageViews"

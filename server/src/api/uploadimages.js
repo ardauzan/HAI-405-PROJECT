@@ -1,6 +1,6 @@
 const express = require("express")
 const multer = require("multer")
-const uploadfiles = express.Router()
+const uploadimages = express.Router()
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		cb(null, "public/images")
@@ -10,10 +10,12 @@ const storage = multer.diskStorage({
 	}
 })
 const upload = multer({ storage: storage })
-
-uploadfiles.put("/", upload.array("image", 24), (req, res, next) => {
+uploadimages.get("/", (req, res, next) => {
+	res.status(200).send("OK")
+})
+uploadimages.put("/", upload.array("image", 24), (req, res, next) => {
 	console.log(req.body)
-	res.json(404)
+	res.status(200).send("OK")
 })
 
-module.exports = uploadfiles
+module.exports = uploadimages
