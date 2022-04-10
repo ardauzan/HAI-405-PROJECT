@@ -13,13 +13,14 @@ const port =
 		: 3000
 
 if (devMode) {
-	app.all("/", (req, res, next) => {
+	app.use("/", (req, res, next) => {
 		console.log(req)
 		next()
 	})
 }
 
 app.use("/api", api)
+
 app.use(express.static(path.join(__dirname, "../../client", "build")))
 app.use(express.static("public"))
 app.use((req, res, next) => {
