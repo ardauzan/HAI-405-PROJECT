@@ -3,7 +3,7 @@
 import axios from "axios"
 
 export const uploadImagesToBackend = async (selectedImages) => {
-	console.log("uploadImagesToBackend firing.")
+	console.time("uploadImagesToBackend")
 	const formData = new FormData()
 	const len = selectedImages.length
 	for (let i = 0; i < len; i++) {
@@ -13,19 +13,20 @@ export const uploadImagesToBackend = async (selectedImages) => {
 	for (let i = 0; i < len; i++) {
 		tmpArr.push({})
 	}
-	const res = axios
+	return axios
 		.put("api/uploadimages", formData)
 		.then((res) => {
 			console.info("status:", res.status)
+			return [...tmpArr]
 		})
 		.catch((e) => {
 			console.error("error:", e)
+			//return []
+			return [...tmpArr]
 		})
 		.finally(() => {
-			console.log("uploadImagesToBackend fired.")
+			console.timeEnd("uploadImagesToBackend")
 		})
-	console.log(res)
-	return tmpArr
 }
 
 export const uploadConfigToBackend = (selectedConfig) => {
@@ -43,4 +44,18 @@ export const uploadConfigToBackend = (selectedConfig) => {
 			//return null
 			return selectedConfig
 		})
+}
+
+export const replaceObjectElementInArray = (l, index, newE) => {
+	console.time("replaceObjectElementInArray")
+	let tmpArr = []
+	for (let i = 0; i < l.length; i++) {
+		if (i === index) {
+			tmpArr.push(newE)
+			continue
+		}
+		tmpArr.push(l[i])
+	}
+	console.timeEnd("replaceObjectElementInArray")
+	return tmpArr
 }

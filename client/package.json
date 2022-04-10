@@ -6,8 +6,7 @@
 	"private": true,
 	"license": "UNLICENSED",
 	"scripts": {
-		"startDev": "yarn build && cd ../server && yarn start-server",
-		"startProd": "yarn build && cd ../server && node src",
+		"start": "npm run build && cd ../server && npm run start-server",
 		"start-client": "react-scripts start",
 		"build": "react-scripts build"
 	},
@@ -31,8 +30,8 @@
 		"eslint-plugin-react-hooks": "^4.3.0"
 	},
 	"engines": {
-		"node": ">=16.10.0",
-		"yarn": ">=1.22.0"
+		"node": ">=17.0.0",
+		"npm": ">=8.0.0"
 	},
 	"os": [
 		"darwin",

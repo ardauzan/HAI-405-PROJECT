@@ -8,5 +8,8 @@
 		"node": true,
 		"es2022": true
 	},
-	"rules": { "no-unused-vars": ["error", { "argsIgnorePattern": "next" }] }
+	"rules": {
+		"no-console": "warn",
+		"no-unused-vars": ["error", { "argsIgnorePattern": "next" }]
+	}
 }

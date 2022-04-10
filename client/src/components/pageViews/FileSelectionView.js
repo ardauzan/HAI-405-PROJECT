@@ -21,9 +21,9 @@ export default function FileSelectionView() {
 			/>
 			<FileSelectorCard selectedFileCount={selectedImages.length} />
 			<button
-				onClick={() => {
-					setFileData(uploadImagesToBackend(selectedImages))
-				}}
+				onClick={async () =>
+					setFileData(await uploadImagesToBackend(selectedImages))
+				}
 				disabled={selectedImages.length < 6 || selectedImages.length > 24}
 			>
 				Upload!

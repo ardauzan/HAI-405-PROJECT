@@ -2,7 +2,7 @@
 	"root": true,
 	"settings": {
 		"react": {
-			"version": "18.0"
+			"version": "18.0.0"
 		}
 	},
 	"parserOptions": {
@@ -21,7 +21,7 @@
 	"rules": {
 		"no-console": "warn",
 		"react-hooks/exhaustive-deps": [
-			"warn",
+			"error",
 			{ "additionalHooks": "(useRecoilCallback|useRecoilTransaction_UNSTABLE)" }
 		]
 	}

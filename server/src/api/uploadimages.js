@@ -14,7 +14,6 @@ uploadimages.get("/", (req, res, next) => {
 	res.status(200).send("OK")
 })
 uploadimages.put("/", upload.array("image", 24), (req, res, next) => {
-	console.log(req.body)
 	res.status(200).send("OK")
 })
 

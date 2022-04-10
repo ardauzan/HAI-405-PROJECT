@@ -5,7 +5,7 @@ import {
 	addAttributeOpenState,
 	indexState
 } from "../../store"
-import { uploadConfigToBackend } from "../../utils"
+import { uploadConfigToBackend, replaceObjectElementInArray } from "../../utils"
 import { AttributeSelectionViewCards } from "../subComponents"
 import styles from "./AttributeSelectionView.module.sass"
 
@@ -34,20 +34,17 @@ export default function AttributeSelectionView() {
 			)}
 			<button
 				hidden={addAttributeOpen}
-				disabled={
-					typeof fileData[index] !== "object" ||
-					Object.keys(fileData[index]).length < 1
-				}
 				onClick={() => {
 					if (index < filesCount) {
 						setFileData((prev) => {
 							let tmpArr = prev
 							let tmpObj = tmpArr[index]
 							tmpObj = { ...tmpObj, attr1: null }
-							tmpArr[index] = tmpObj
-							return tmpArr
+							return replaceObjectElementInArray(tmpArr, index, tmpObj)
 						})
-						setIndex((prev) => prev + 1)
+						setIndex((prev) => {
+							return prev + 1
+						})
 					} else {
 						uploadConfigToBackend(fileData)
 					}

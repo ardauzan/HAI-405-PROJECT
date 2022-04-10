@@ -1,23 +1,17 @@
+/* eslint-disable no-console */
+
 const path = require("path")
 const express = require("express")
 const api = require("./api")
 
 const app = express()
-let devMode = true
-const port =
-	process.argv[2] !== "dev"
-		? (() => {
-				devMode = false
-				return process.argv[2] || 5000
-		  })()
-		: 3000
 
-if (devMode) {
-	app.use("/", (req, res, next) => {
-		console.log(req)
-		next()
-	})
-}
+const port = 5000
+
+app.use("/", (req, res, next) => {
+	console.table({ host: req.headers.host, url: req.url, method: req.method })
+	next()
+})
 
 app.use("/api", api)
 
@@ -28,5 +22,6 @@ app.use((req, res, next) => {
 })
 
 app.listen(port, () => {
-	console.log(`Server started on < port: ${port}, devMode: ${devMode} >`)
+	console.clear()
+	console.log(`Server started on < port: ${port} >`)
 })

@@ -6,6 +6,8 @@ import {
 	possibleAttributesState
 } from "../../../store"
 
+import { replaceObjectElementInArray } from "../../../utils"
+
 export default function AttributeSelectorCard() {
 	const [fileData, setFileData] = useRecoilState(fileDataState)
 	const setAddAttributeOpen = useSetRecoilState(addAttributeOpenState)
@@ -39,8 +41,11 @@ export default function AttributeSelectorCard() {
 																...tmpObj,
 																[v.name]: v.possibilities[i][0]
 															}
-															tmpArr2[i] = tmpObj
-															return tmpArr2
+															return replaceObjectElementInArray(
+																tmpArr2,
+																i,
+																tmpObj
+															)
 														})
 													}}
 												/>
@@ -67,8 +72,11 @@ export default function AttributeSelectorCard() {
 													let tmpArr3 = prev
 													let tmpObj = tmpArr3[index]
 													tmpObj = { ...tmpObj, [v.name]: !prev[index][v.name] }
-													tmpArr3[index] = tmpObj
-													return tmpArr3
+													return replaceObjectElementInArray(
+														tmpArr3,
+														index,
+														tmpObj
+													)
 												})
 											}}
 										/>
@@ -86,14 +94,20 @@ export default function AttributeSelectorCard() {
 										<input
 											id={"artN4-" + i}
 											type="number"
-											name={v[i]}
+											name={v.name}
 											onInput={(e) => {
 												setFileData((prev) => {
 													let tmpArr2 = prev
 													let tmpObj = tmpArr2[index] ? tmpArr2[index] : {}
-													tmpObj = { ...tmpObj, [v.name]: e.target.v }
-													tmpArr2[index] = tmpObj
-													return tmpArr2
+													tmpObj = {
+														...tmpObj,
+														[v.name]: Number(e.target.value)
+													}
+													return replaceObjectElementInArray(
+														tmpArr2,
+														index,
+														tmpObj
+													)
 												})
 											}}
 											min="0"

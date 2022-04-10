@@ -15,5 +15,10 @@
 	"errorLens.delay": 650,
 	"errorLens.enableOnDiffView": true,
 	"errorLens.statusBarMessageType": "closestSeverity",
-	"editor.cursorStyle": "block-outline"
+	"editor.cursorStyle": "block-outline",
+	"shellcheck.run": "onSave",
+	"shellcheck.useWorkspaceRootAsCwd": true,
+	"[shellscript]": {
+		"editor.defaultFormatter": "shakram02.bash-beautify"
+	}
 }
