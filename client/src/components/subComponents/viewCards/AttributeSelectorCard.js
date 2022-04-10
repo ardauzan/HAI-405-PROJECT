@@ -1,115 +1,114 @@
-import PropTypes from "prop-types"
-export default function AttributeSelectorCard({
-	possibleAttributes,
-	attributesSelectedForThisImage,
-	setAttributesSelectedForThisImage,
-	setAddAttributeOpen
-}) {
-	const renderStringSelection = (v) => {
-		let tmpArr1 = []
-		const tmpArr2 = Object.keys(v.possibilities).map((i) => [
-			v.possibilities[i]
-		])
-		for (let i = 0; i < tmpArr2.length; i++) {
-			tmpArr1 = [
-				...tmpArr1,
-				<div key={i}>
-					<label htmlFor={"artN2-" + i}>{tmpArr2[i]}</label>
-					<input
-						type="radio"
-						name={v.name}
-						defaultChecked={attributesSelectedForThisImage[tmpArr2[i]]}
-						onInput={() => {
-							setAttributesSelectedForThisImage({
-								...attributesSelectedForThisImage,
-								[v.name]: tmpArr2[i][0]
-							})
-						}}
-						id={"artN2-" + i}
-					/>
-				</div>
-			]
-		}
-		return tmpArr1
-	}
-	const renderBooleanSelection = (v, i) => (
-		<>
-			<label htmlFor={"artN3-" + i}>{v[i]}</label>
-			<input
-				type="checkbox"
-				name={v.name}
-				defaultChecked={attributesSelectedForThisImage[v.name]}
-				onInput={() => {
-					setAttributesSelectedForThisImage({
-						...attributesSelectedForThisImage,
-						[v.name]: !attributesSelectedForThisImage[v.name]
-					})
-				}}
-				id={"artN3-" + i}
-			/>
-		</>
-	)
-	const renderNumberSelection = (v, i) => (
-		<>
-			<label htmlFor={"artN4-" + i}>{v[i]}</label>
-			<input
-				type="number"
-				defaultv={attributesSelectedForThisImage[v.name] | 0}
-				name={v.i}
-				onInput={(e) => {
-					setAttributesSelectedForThisImage({
-						...attributesSelectedForThisImage,
-						[v.name]: e.target.v
-					})
-				}}
-				id={"artN4-" + i}
-				min="0"
-			/>
-		</>
-	)
-	const renderContent = () => (
-		<>
-			<h5>Chose from these attributes (leave empty for unset):</h5>
+import { useRecoilState, useSetRecoilState, useRecoilValue } from "recoil"
+import {
+	fileDataState,
+	addAttributeOpenState,
+	indexState,
+	possibleAttributesState
+} from "../../../store"
+
+export default function AttributeSelectorCard() {
+	const [fileData, setFileData] = useRecoilState(fileDataState)
+	const setAddAttributeOpen = useSetRecoilState(addAttributeOpenState)
+	const index = useRecoilValue(indexState)
+	const possibleAttributes = useRecoilValue(possibleAttributesState)
+	return (
+		<article>
+			<h3>Attribute Selector</h3>
 			{possibleAttributes.map((v, i) => {
 				switch (v.type) {
 					case "string":
 						return (
 							<div key={i}>
 								<h4>{v.name + " | (" + v.type + ")"}</h4>
-								{renderStringSelection(v)}
+								{(() => {
+									let tmpArr = []
+									for (let i = 0; i < v.possibilities; i++) {
+										tmpArr = [
+											...tmpArr,
+											<div key={i}>
+												<label htmlFor={"artN2-" + i}>{v[i]}</label>
+												<input
+													id={"artN2-" + i}
+													type="radio"
+													name={v.name}
+													onInput={() => {
+														setFileData((prev) => {
+															let tmpArr2 = prev
+															let tmpObj = tmpArr2[i]
+															tmpObj = {
+																...tmpObj,
+																[v.name]: v.possibilities[i][0]
+															}
+															tmpArr2[i] = tmpObj
+															return tmpArr2
+														})
+													}}
+												/>
+											</div>
+										]
+									}
+									return tmpArr
+								})()}
 							</div>
 						)
 					case "boolean":
 						return (
 							<div key={i}>
 								<h4>{v.name + " | (" + v.type + ")"}</h4>
-								{renderBooleanSelection(v, i)}
+								{(() => (
+									<>
+										<label htmlFor={"artN3-" + i}>{v[i]}</label>
+										<input
+											id={"artN3-" + i}
+											type="checkbox"
+											name={v.name}
+											onInput={() => {
+												setFileData((prev) => {
+													let tmpArr3 = prev
+													let tmpObj = tmpArr3[index]
+													tmpObj = { ...tmpObj, [v.name]: !prev[index][v.name] }
+													tmpArr3[index] = tmpObj
+													return tmpArr3
+												})
+											}}
+										/>
+									</>
+								))()}
 							</div>
 						)
 					case "number":
 						return (
 							<div key={i}>
 								<h4>{v.name + " | (" + v.type + ")"}</h4>
-								{renderNumberSelection(v, i)}
+								{(() => (
+									<>
+										<label htmlFor={"artN4-" + i}>{v[i]}</label>
+										<input
+											id={"artN4-" + i}
+											type="number"
+											name={v[i]}
+											onInput={(e) => {
+												setFileData((prev) => {
+													let tmpArr2 = prev
+													let tmpObj = tmpArr2[index] ? tmpArr2[index] : {}
+													tmpObj = { ...tmpObj, [v.name]: e.target.v }
+													tmpArr2[index] = tmpObj
+													return tmpArr2
+												})
+											}}
+											min="0"
+										/>
+									</>
+								))()}
 							</div>
 						)
 				}
 			})}
 			<h5>Or add another one:</h5>
 			<button onClick={() => setAddAttributeOpen(true)}>Add attribute!</button>
-		</>
+			<button onClick={() => console.log(fileData, possibleAttributes)}>
+				log
+			</button>
+		</article>
 	)
-	return <div className="attributeSelector">{renderContent()}</div>
-}
-
-AttributeSelectorCard.propTypes = {
-	possibleAttributes: PropTypes.array.isRequired,
-	attributesSelectedForThisImage: PropTypes.object.isRequired,
-	setAttributesSelectedForThisImage: PropTypes.func.isRequired,
-	setAddAttributeOpen: PropTypes.func.isRequired,
-	addAttributeOpen: PropTypes.bool.isRequired,
-	attributes: PropTypes.array.isRequired,
-	setAttributes: PropTypes.func.isRequired,
-	setFilesChosen: PropTypes.func.isRequired,
-	setPossibleAttributes: PropTypes.func.isRequired
 }

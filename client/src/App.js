@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react"
-import { RecoilRoot } from "recoil"
+import Store from "./store"
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom"
 import fallbacks from "./pages/fallbacks"
 import { Header } from "./components"
@@ -14,7 +14,7 @@ const { InternalServerError, Loading, PageNotFound } = fallbacks
 export default function App() {
 	return (
 		<ErrorBoundary>
-			<RecoilRoot>
+			<Store>
 				<BrowserRouter>
 					<Header />
 					<Suspense fallback={<Loading />}>
@@ -29,7 +29,7 @@ export default function App() {
 					</Suspense>
 					<Footer />
 				</BrowserRouter>
-			</RecoilRoot>
+			</Store>
 		</ErrorBoundary>
 	)
 }

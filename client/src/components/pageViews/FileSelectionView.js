@@ -1,48 +1,33 @@
-import PropTypes from "prop-types"
+import { useState } from "react"
+import { useSetRecoilState } from "recoil"
+import { fileDataState } from "../../store"
+import { FileSelectionViewCards } from "../subComponents"
 import { uploadImagesToBackend } from "../../utils"
+import styles from "./FileSelectionView.module.sass"
 
-export default function FileSelectionView({
-	selectedFiles,
-	setSelectedFiles,
-	setFilesChosen
-}) {
-	const renderContent = () =>
-		selectedFiles.length >= 6 && selectedFiles.length <= 24 ? (
-			<>
-				<h2>Selection Details:</h2>
-				<p>Amount of images chosen: {selectedFiles.length}</p>
-			</>
-		) : (
-			<>
-				<h2>Invalid selection</h2>
-				<p>Choose image files to use. (At least 6, at most 24)</p>
-			</>
-		)
+const { FileSelectorCard } = FileSelectionViewCards
+const { container, heading } = styles
 
+export default function FileSelectionView() {
+	const [selectedImages, setSelectedImages] = useState([])
+	const setFileData = useSetRecoilState(fileDataState)
 	return (
-		<>
-			<div></div>
-			<h3>First select image files to upload.</h3>
-			<div>
-				<input
-					type="file"
-					onChange={(e) => setSelectedFiles([...e.target.files])}
-					multiple
-				/>
-				{renderContent()}
-			</div>
+		<section className={container}>
+			<h2 className={heading}>File Selection</h2>
+			<input
+				type="file"
+				onChange={(e) => setSelectedImages([...e.target.files])}
+				multiple
+			/>
+			<FileSelectorCard selectedFileCount={selectedImages.length} />
 			<button
-				onClick={() => uploadImagesToBackend(selectedFiles, setFilesChosen)}
-				disabled={selectedFiles.length < 6 || selectedFiles.length > 24}
+				onClick={() => {
+					setFileData(uploadImagesToBackend(selectedImages))
+				}}
+				disabled={selectedImages.length < 6 || selectedImages.length > 24}
 			>
 				Upload!
 			</button>
-		</>
+		</section>
 	)
-}
-
-FileSelectionView.propTypes = {
-	selectedFiles: PropTypes.array.isRequired,
-	setSelectedFiles: PropTypes.func.isRequired,
-	setFilesChosen: PropTypes.func.isRequired
 }

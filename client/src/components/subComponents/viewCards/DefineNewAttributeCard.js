@@ -1,44 +1,68 @@
-import { useState, useEffect } from "react"
-
 import PropTypes from "prop-types"
+import { useState } from "react"
+import { useSetRecoilState } from "recoil"
+import { possibleAttributesState, addAttributeOpenState } from "../../../store"
 
-export default function DefineNewAttributeCard({
-	possibleAttributes,
-	setPossibleAttributes,
-	setAddAttributeOpen
-}) {
-	useEffect(() => {
-		setNewAttribute({ type: "boolean" })
-	}, [])
-	const [newAttribute, setNewAttribute] = useState({})
-	const [newValues, setNewValues] = useState([])
-	const [newPossibilities, setnewPossibilities] = useState({})
-	const renderContent = () => (
-		<>
-			<h5>Attribute name:</h5>
+export default function DefineNewAttributeCard() {
+	const [newAttribute, setNewAttribute] = useState({ type: "boolean" })
+	const [
+		newStringAttributePossibleValues,
+		setNewStringAttributePossibleValues
+	] = useState({})
+	const [
+		newStringAttributePossibleInputsCount,
+		setNewStringAttributePossibleInputsCount
+	] = useState(0)
+	const [
+		newStringAttributePossibleInputs,
+		setNewStringAttributePossibleInputs
+	] = useState([])
+	const setPossibleAttributes = useSetRecoilState(possibleAttributesState)
+	const setAddAttributeOpen = useSetRecoilState(addAttributeOpenState)
+	const StringInput = ({ index, setNewStringAttributePossibleValues }) => {
+		return (
+			<input
+				onInput={(e) => {
+					setNewStringAttributePossibleValues((prev) => {
+						return { ...prev, [index]: e.target.value }
+					})
+				}}
+			/>
+		)
+	}
+	StringInput.propTypes = {
+		index: PropTypes.number.isRequired,
+		setNewStringAttributePossibleValues: PropTypes.func.isRequired
+	}
+	return (
+		<article>
+			<h3>Define New Attribute</h3>
+			<label htmlFor="atrName">Attribute name:</label>
 			<input
 				type="text"
 				id="atrName"
 				onInput={(e) =>
-					setNewAttribute({
-						...newAttribute,
-						name: e.target.value
+					setNewAttribute((prev) => {
+						return {
+							...prev,
+							name: e.target.value
+						}
 					})
 				}
 			/>
-			<h5>Attribute type:</h5>
+			<h4>Attribute type:</h4>
 			<label htmlFor="atrStr">String</label>
 			<input
 				type="radio"
 				name="type"
 				id="atrStr"
 				onInput={() => {
-					setNewAttribute({
-						...newAttribute,
-						type: "string"
+					setNewAttribute((prev) => {
+						return {
+							...prev,
+							type: "string"
+						}
 					})
-					setnewPossibilities({})
-					setNewValues([])
 				}}
 			/>
 			<label htmlFor="atrBool">Boolean</label>
@@ -48,12 +72,15 @@ export default function DefineNewAttributeCard({
 				defaultChecked
 				id="atrBool"
 				onInput={() => {
-					setNewAttribute({
-						...newAttribute,
-						type: "boolean"
+					setNewAttribute((prev) => {
+						return {
+							...prev,
+							type: "boolean"
+						}
 					})
-					setnewPossibilities({})
-					setNewValues([])
+					setNewStringAttributePossibleValues({})
+					setNewStringAttributePossibleInputs([])
+					setNewStringAttributePossibleInputsCount(0)
 				}}
 			/>
 			<label htmlFor="atrNum">Number</label>
@@ -62,67 +89,89 @@ export default function DefineNewAttributeCard({
 				name="type"
 				id="atrNum"
 				onInput={() => {
-					setNewAttribute({
-						...newAttribute,
-						type: "number"
+					setNewAttribute((prev) => {
+						return {
+							...prev,
+							type: "number"
+						}
 					})
-					setnewPossibilities({})
-					setNewValues([])
+					setNewStringAttributePossibleValues({})
+					setNewStringAttributePossibleInputs([])
+					setNewStringAttributePossibleInputsCount(0)
 				}}
 			/>
-			<div hidden={!(newAttribute.type === "string")}>
-				<h5>Possible Values:</h5>
-				{newValues}
-				<button
-					onClick={() => {
-						setNewValues([
-							...newValues,
-							<input
-								type="text"
-								id={"artN-" + newValues.length}
-								key={newValues.length}
-								onChange={(e) =>
-									setnewPossibilities((previousState) => {
-										return {
-											...previousState,
-											["artN-" + newValues.length]: e.target.value
+			{newAttribute.type === "string" ? (
+				<>
+					<h4>Possible Values:</h4>
+					{newStringAttributePossibleInputs}
+					<button
+						onClick={() => {
+							setNewStringAttributePossibleInputs((prev) => {
+								return [
+									...prev,
+									<StringInput
+										setNewStringAttributePossibleValues={
+											setNewStringAttributePossibleValues
 										}
-									})
-								}
-							/>
-						])
-					}}
-				>
-					New Value
-				</button>
-			</div>
+										index={newStringAttributePossibleInputsCount}
+										key={newStringAttributePossibleInputsCount}
+									/>
+								]
+							})
+							setNewStringAttributePossibleInputsCount((prev) => prev + 1)
+						}}
+					>
+						New Value
+					</button>
+				</>
+			) : null}
 			<button
 				disabled={
+					!newAttribute.name ||
+					/^ *$/.test(newAttribute.name) ||
 					(newAttribute.type === "string" &&
-						(newValues.length < 2 ||
-							Object.values(newPossibilities).includes(""))) ||
-					(newAttribute.type !== "string" &&
-						possibleAttributes.some((a) => a.name === newAttribute.name))
+						Object.values(newStringAttributePossibleValues).filter((i) => {
+							return !/^ *$/.test(i)
+						}).length < 2) ||
+					(newAttribute.type === "string" &&
+						Object.values(newStringAttributePossibleValues).filter(
+							(i) => i !== ""
+						).length <= 1) ||
+					(newAttribute.type === "string" &&
+						(() => {
+							const tmpArr = Object.values(
+								newStringAttributePossibleValues
+							).filter((i) => i !== "")
+							const tmpSet = new Set(tmpArr)
+							return tmpSet.size < tmpArr.length
+						})())
 				}
-				onClick={() => {
-					setPossibleAttributes([
-						...possibleAttributes,
-						newAttribute.type === "string"
-							? { ...newAttribute, possibilities: newPossibilities }
-							: newAttribute
-					])
-					setAddAttributeOpen(false)
-				}}
+				onClick={() =>
+					newAttribute.type === "string"
+						? (() => {
+								setPossibleAttributes((prev) => {
+									return [
+										...prev,
+										{
+											...newAttribute,
+											possibilities: Object.values(
+												newStringAttributePossibleValues
+											).filter((i) => (i ? !/^ *$/.test(i) : false))
+										}
+									]
+								})
+								setAddAttributeOpen(false)
+						  })()
+						: (() => {
+								setPossibleAttributes((prev) => {
+									return [...prev, newAttribute]
+								})
+								setAddAttributeOpen(false)
+						  })()
+				}
 			>
 				Finish Defining
 			</button>
-		</>
+		</article>
 	)
-	return <div className="defineNewAttribute">{renderContent()}</div>
-}
-
-DefineNewAttributeCard.propTypes = {
-	possibleAttributes: PropTypes.array.isRequired,
-	setPossibleAttributes: PropTypes.func.isRequired,
-	setAddAttributeOpen: PropTypes.func.isRequired
 }

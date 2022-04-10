@@ -1,100 +1,63 @@
-import PropTypes from "prop-types"
-import { useState } from "react"
-import { uploadImagesToBackend } from "../../utils"
+import { useRecoilState, useRecoilValue } from "recoil"
+import {
+	fileDataState,
+	filesCountState,
+	addAttributeOpenState,
+	indexState
+} from "../../store"
+import { uploadConfigToBackend } from "../../utils"
 import { AttributeSelectionViewCards } from "../subComponents"
+import styles from "./AttributeSelectionView.module.sass"
 
 const { AttributeSelectorCard, DefineNewAttributeCard } =
 	AttributeSelectionViewCards
+const { container, heading } = styles
 
-export default function AttributeSelectionView({
-	selectedFiles,
-	setSelectedFiles,
-	setFilesChosen
-}) {
-	const [attributesSelectedForThisImage, setAttributesSelectedForThisImage] =
-		useState({})
-	const [attributes, setAttributes] = useState([])
-	const [addAttributeOpen, setAddAttributeOpen] = useState(false)
-	const [possibleAttributes, setPossibleAttributes] = useState([])
-
+export default function AttributeSelectionView() {
+	const [fileData, setFileData] = useRecoilState(fileDataState)
+	const filesCount = useRecoilValue(filesCountState)
+	const addAttributeOpen = useRecoilValue(addAttributeOpenState)
+	const [index, setIndex] = useRecoilState(indexState)
 	return (
-		<section>
-			<h2>Attribute Selection</h2>
-			<h4>Image {selectedFiles.length}</h4>
+		<section className={container}>
+			<h2 className={heading}>Attribute Selection</h2>
+			<p>Image: {index + 1}</p>
 			<img
-				alt={"image-" + selectedFiles.length}
-				src={"images/image-" + selectedFiles.length + ".png"}
+				alt={"image-" + (index + 1)}
+				src={"images/image-" + (index + 1) + ".png"}
 			/>
 			<h5>Define new attribute:</h5>
 			{!addAttributeOpen ? (
-				<AttributeSelectorCard
-					attributesSelectedForThisImage={attributesSelectedForThisImage}
-					setAttributesSelectedForThisImage={setAttributesSelectedForThisImage}
-					possibleAttributes={possibleAttributes}
-					setAddAttributeOpen={setAddAttributeOpen}
-					addAttributeOpen={addAttributeOpen}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					setSelectedFiles={setSelectedFiles}
-					setFilesChosen={setFilesChosen}
-					setPossibleAttributes={setPossibleAttributes}
-					selectedFiles={selectedFiles}
-				/>
+				<AttributeSelectorCard />
 			) : (
-				<DefineNewAttributeCard
-					possibleAttributes={possibleAttributes}
-					setPossibleAttributes={setPossibleAttributes}
-					setAddAttributeOpen={setAddAttributeOpen}
-					selectedFiles={selectedFiles}
-					addAttributeOpen={addAttributeOpen}
-					attributesSelectedForThisImage={attributesSelectedForThisImage}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					setSelectedFiles={setSelectedFiles}
-					setFilesChosen={setFilesChosen}
-					setAttributesSelectedForThisImage={setAttributesSelectedForThisImage}
-				/>
+				<DefineNewAttributeCard index={index} />
 			)}
 			<button
 				hidden={addAttributeOpen}
-				disabled={attributesSelectedForThisImage.length < 1}
+				disabled={
+					typeof fileData[index] !== "object" ||
+					Object.keys(fileData[index]).length < 1
+				}
 				onClick={() => {
-					if (selectedFiles.length > 0) {
-						setAttributes([
-							...attributes,
-							{
-								image: selectedFiles.length,
-								attributes: attributesSelectedForThisImage
-							}
-						])
-						let tmpArr = selectedFiles
-						tmpArr.pop()
-						setSelectedFiles(tmpArr)
+					if (index < filesCount) {
+						setFileData((prev) => {
+							let tmpArr = prev
+							let tmpObj = tmpArr[index]
+							tmpObj = { ...tmpObj, attr1: null }
+							tmpArr[index] = tmpObj
+							return tmpArr
+						})
+						setIndex((prev) => prev + 1)
 					} else {
-						uploadImagesToBackend(setFilesChosen, attributes)
+						uploadConfigToBackend(fileData)
 					}
 				}}
 			>
-				{selectedFiles.length > 0 ? "Next image!" : "Submit attributes"}
+				{index < filesCount ? "Next image!" : "Submit attributes"}
 			</button>
-			<button
-				hidden={addAttributeOpen}
-				onClick={() => {
-					setSelectedFiles([])
-					setFilesChosen(false)
-					setAttributes([])
-					setAttributesSelectedForThisImage([])
-					setPossibleAttributes([])
-				}}
-			>
+			<button hidden={addAttributeOpen} onClick={() => {}}>
 				Start-over!
 			</button>
 		</section>
 	)
-}
-
-AttributeSelectionView.propTypes = {
-	selectedFiles: PropTypes.array.isRequired,
-	setSelectedFiles: PropTypes.func.isRequired,
-	setFilesChosen: PropTypes.func.isRequired
 }

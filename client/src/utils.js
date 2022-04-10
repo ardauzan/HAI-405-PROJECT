@@ -2,31 +2,45 @@
 
 import axios from "axios"
 
-export const uploadImagesToBackend = (selectedFiles, setFilesChosen) => {
+export const uploadImagesToBackend = async (selectedImages) => {
+	console.log("uploadImagesToBackend firing.")
 	const formData = new FormData()
-	for (let i = 0; i < selectedFiles.length; i++) {
-		formData.append("image", selectedFiles[i], "image-" + (i + 1) + ".png")
+	const len = selectedImages.length
+	for (let i = 0; i < len; i++) {
+		formData.append("image", selectedImages[i], "image-" + (i + 1) + ".png")
 	}
-	axios
+	let tmpArr = []
+	for (let i = 0; i < len; i++) {
+		tmpArr.push({})
+	}
+	const res = axios
 		.put("api/uploadimages", formData)
 		.then((res) => {
-			console.info(res)
-			setFilesChosen(true)
+			console.info("status:", res.status)
 		})
 		.catch((e) => {
-			console.error(e)
-			setFilesChosen(true)
+			console.error("error:", e)
 		})
+		.finally(() => {
+			console.log("uploadImagesToBackend fired.")
+		})
+	console.log(res)
+	return tmpArr
 }
 
-export const uploadConfigToBackend = (setFilesChosen, attributes) => {
+export const uploadConfigToBackend = (selectedConfig) => {
 	axios
 		.put(
 			"api/uploadconfig",
-			JSON.stringify({ rows: 2, columns: 3, data: attributes })
+			JSON.stringify({ rows: 2, columns: 3, data: selectedConfig })
 		)
-		.then(setFilesChosen(false))
+		.then((res) => {
+			console.info(res)
+			return selectedConfig
+		})
 		.catch((e) => {
 			console.error(e)
+			//return null
+			return selectedConfig
 		})
 }
