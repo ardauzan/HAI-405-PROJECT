@@ -86,7 +86,8 @@ export default function AttributeSelectorCard() {
 								id={"artN3-" + i}
 								type="checkbox"
 								name={v.name}
-								onInput={() => {
+								checked={fileData[index][v.name]}
+								onChange={() => {
 									setFileData((prev) => {
 										let tmpArr = prev
 										let tmpObj = tmpArr[index]
@@ -108,7 +109,9 @@ export default function AttributeSelectorCard() {
 								id={"artN4-" + i}
 								type="number"
 								name={v.name}
-								onInput={(e) => {
+								value={fileData[index][v.name]}
+								defaultValue={0}
+								onChange={(e) => {
 									setFileData((prev) => {
 										let tmpArr = prev
 										let tmpObj = tmpArr[index] ? tmpArr[index] : {}
@@ -174,11 +177,6 @@ export default function AttributeSelectorCard() {
 			<section>
 				<h4>Or define a new attribute:</h4>
 				<button onClick={() => setAddAttributeOpen(true)}>Define new.</button>
-				<button
-					onClick={() => console.log(fileData, possibleAttributes, index)}
-				>
-					log
-				</button>
 			</section>
 		</article>
 	)
