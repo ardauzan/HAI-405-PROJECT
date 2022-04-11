@@ -13,7 +13,9 @@ export default function AttributeSelectorCard() {
 	const [fileData, setFileData] = useRecoilState(fileDataState)
 	const setAddAttributeOpen = useSetRecoilState(addAttributeOpenState)
 	const index = useRecoilValue(indexState)
-	const possibleAttributes = useRecoilValue(possibleAttributesState)
+	const [possibleAttributes, setPossibleAttributes] = useRecoilState(
+		possibleAttributesState
+	)
 	const Choice = ({ v, i }) => {
 		switch (v.type) {
 			case "string":
@@ -86,10 +88,10 @@ export default function AttributeSelectorCard() {
 								name={v.name}
 								onInput={() => {
 									setFileData((prev) => {
-										let tmpArr3 = prev
-										let tmpObj = tmpArr3[index]
+										let tmpArr = prev
+										let tmpObj = tmpArr[index]
 										tmpObj = { ...tmpObj, [v.name]: !prev[index][v.name] }
-										return replaceObjectElementInArray(tmpArr3, index, tmpObj)
+										return replaceObjectElementInArray(tmpArr, index, tmpObj)
 									})
 								}}
 							/>
@@ -108,13 +110,13 @@ export default function AttributeSelectorCard() {
 								name={v.name}
 								onInput={(e) => {
 									setFileData((prev) => {
-										let tmpArr2 = prev
-										let tmpObj = tmpArr2[index] ? tmpArr2[index] : {}
+										let tmpArr = prev
+										let tmpObj = tmpArr[index] ? tmpArr[index] : {}
 										tmpObj = {
 											...tmpObj,
 											[v.name]: Number(e.target.value)
 										}
-										return replaceObjectElementInArray(tmpArr2, index, tmpObj)
+										return replaceObjectElementInArray(tmpArr, index, tmpObj)
 									})
 								}}
 								min="0"
@@ -137,14 +139,47 @@ export default function AttributeSelectorCard() {
 	return (
 		<article>
 			<h3>Attribute Selector</h3>
-			{possibleAttributes.map((v, i) => (
-				<Choice key={i} v={v} i={i} />
-			))}
-			<h5>Or add another one:</h5>
-			<button onClick={() => setAddAttributeOpen(true)}>Add attribute!</button>
-			<button onClick={() => console.log(fileData, possibleAttributes, index)}>
-				log
-			</button>
+			<section>
+				<h4>Select attibutes for image:</h4>
+				{possibleAttributes.map((v, i) => (
+					<article key={i}>
+						<Choice v={v} i={i} />
+						<button
+							onClick={() => {
+								let tmpArr = []
+								for (let ii = 0; ii < possibleAttributes.length - 1; ii++) {
+									if (possibleAttributes[ii].name !== v.name) {
+										tmpArr.push(possibleAttributes[ii])
+									}
+								}
+								setPossibleAttributes(tmpArr)
+								tmpArr = []
+								for (let ii = 0; ii < fileData.length; ii++) {
+									tmpArr.push({})
+									for (let iii in fileData[ii]) {
+										if (iii === v.name) {
+											continue
+										}
+										tmpArr[ii] = { ...tmpArr[ii], [iii]: fileData[ii][iii] }
+									}
+								}
+								setFileData(tmpArr)
+							}}
+						>
+							Delete attribute
+						</button>
+					</article>
+				))}
+			</section>
+			<section>
+				<h4>Or define a new attribute:</h4>
+				<button onClick={() => setAddAttributeOpen(true)}>Define new.</button>
+				<button
+					onClick={() => console.log(fileData, possibleAttributes, index)}
+				>
+					log
+				</button>
+			</section>
 		</article>
 	)
 }
