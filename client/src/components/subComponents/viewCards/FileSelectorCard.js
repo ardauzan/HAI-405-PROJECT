@@ -12,13 +12,13 @@ export default function FileSelectorCard({ selectedFileCount }) {
 					? "Selection Details"
 					: "Invalid selection"}
 			</h3>
-			<div className={content}>
+			<section className={content}>
 				<p className={description}>
 					{selectedFileCount >= 6 && selectedFileCount <= 24
 						? `Amount of images chosen: ${selectedFileCount}`
 						: "Choose image files to use. (At least 6, at most 24)"}
 				</p>
-			</div>
+			</section>
 		</article>
 	)
 }

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types"
 import { useState } from "react"
-import { useSetRecoilState } from "recoil"
+import { useRecoilState, useSetRecoilState } from "recoil"
 import { possibleAttributesState, addAttributeOpenState } from "../../../store"
 
 export default function DefineNewAttributeCard() {
@@ -17,7 +17,9 @@ export default function DefineNewAttributeCard() {
 		newStringAttributePossibleInputs,
 		setNewStringAttributePossibleInputs
 	] = useState([])
-	const setPossibleAttributes = useSetRecoilState(possibleAttributesState)
+	const [possibleAttributes, setPossibleAttributes] = useRecoilState(
+		possibleAttributesState
+	)
 	const setAddAttributeOpen = useSetRecoilState(addAttributeOpenState)
 	const StringInput = ({ index, setNewStringAttributePossibleValues }) => {
 		return (
@@ -106,6 +108,7 @@ export default function DefineNewAttributeCard() {
 					{newStringAttributePossibleInputs}
 					<button
 						onClick={() => {
+							console.log(newAttribute.name, possibleAttributes)
 							setNewStringAttributePossibleInputs((prev) => {
 								return [
 									...prev,

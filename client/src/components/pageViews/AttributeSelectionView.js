@@ -5,7 +5,7 @@ import {
 	addAttributeOpenState,
 	indexState
 } from "../../store"
-import { uploadConfigToBackend, replaceObjectElementInArray } from "../../utils"
+import { uploadConfigToBackend } from "../../utils"
 import { AttributeSelectionViewCards } from "../subComponents"
 import styles from "./AttributeSelectionView.module.sass"
 
@@ -14,7 +14,7 @@ const { AttributeSelectorCard, DefineNewAttributeCard } =
 const { container, heading } = styles
 
 export default function AttributeSelectionView() {
-	const [fileData, setFileData] = useRecoilState(fileDataState)
+	const fileData = useRecoilValue(fileDataState)
 	const filesCount = useRecoilValue(filesCountState)
 	const addAttributeOpen = useRecoilValue(addAttributeOpenState)
 	const [index, setIndex] = useRecoilState(indexState)
@@ -30,27 +30,34 @@ export default function AttributeSelectionView() {
 			{!addAttributeOpen ? (
 				<AttributeSelectorCard />
 			) : (
-				<DefineNewAttributeCard index={index} />
+				<DefineNewAttributeCard />
 			)}
 			<button
 				hidden={addAttributeOpen}
+				disabled={index <= 0}
 				onClick={() => {
-					if (index < filesCount) {
-						setFileData((prev) => {
-							let tmpArr = prev
-							let tmpObj = tmpArr[index]
-							tmpObj = { ...tmpObj, attr1: null }
-							return replaceObjectElementInArray(tmpArr, index, tmpObj)
-						})
+					if (index > 0) {
 						setIndex((prev) => {
-							return prev + 1
+							return prev - 1
 						})
-					} else {
-						uploadConfigToBackend(fileData)
 					}
 				}}
 			>
-				{index < filesCount ? "Next image!" : "Submit attributes"}
+				Previous image!
+			</button>
+			<button
+				hidden={addAttributeOpen}
+				onClick={() => {
+					if (index + 1 < filesCount) {
+						setIndex((prev) => {
+							return prev + 1
+						})
+						return
+					}
+					uploadConfigToBackend(fileData)
+				}}
+			>
+				{index + 1 < filesCount ? "Next image!" : "Submit attributes"}
 			</button>
 			<button hidden={addAttributeOpen} onClick={() => {}}>
 				Start-over!
