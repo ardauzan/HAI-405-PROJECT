@@ -6,9 +6,10 @@
 	"private": true,
 	"license": "UNLICENSED",
 	"scripts": {
-		"start": "npm run build && cd ../server && npm run start-server",
+		"start": "npm run build && cd ../server && node src",
 		"start-client": "react-scripts start",
-		"build": "react-scripts build"
+		"build-client": "react-scripts build",
+		"start-server": "cd ../server && npm run start-server"
 	},
 	"dependencies": {
 		"axios": "^0.26.1",

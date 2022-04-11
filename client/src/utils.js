@@ -30,6 +30,7 @@ export const uploadImagesToBackend = async (selectedImages) => {
 }
 
 export const uploadConfigToBackend = (selectedConfig) => {
+	console.time("uploadConfigToBackend")
 	axios
 		.put(
 			"api/uploadconfig",
@@ -43,6 +44,9 @@ export const uploadConfigToBackend = (selectedConfig) => {
 			console.error(e)
 			//return null
 			return selectedConfig
+		})
+		.finally(() => {
+			console.timeEnd("uploadConfigToBackend")
 		})
 }
 

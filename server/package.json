@@ -8,6 +8,7 @@
 	"scripts": {
 		"start": "cd ../client && npm run start",
 		"start-client": "cd ../client && npm run start-client",
+		"build-client": "cd ../client && npm run react-scripts build",
 		"start-server": "nodemon src"
 	},
 	"dependencies": {
