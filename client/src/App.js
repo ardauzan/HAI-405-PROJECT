@@ -7,13 +7,13 @@ import { ErrorBoundary, Footer } from "./components"
 
 const Game = lazy(() => import("./pages/Game"))
 const Generator = lazy(() => import("./pages/Generator"))
-const Home = lazy(() => import("./pages"))
+const Home = lazy(() => import("./pages/Home"))
 
 const { InternalServerError, Loading, PageNotFound } = fallbacks
 
 export default function App() {
 	return (
-		<ErrorBoundary>
+		<ErrorBoundary type="root">
 			<Store>
 				<BrowserRouter>
 					<Header />

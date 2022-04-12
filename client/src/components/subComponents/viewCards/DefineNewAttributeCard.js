@@ -108,7 +108,6 @@ export default function DefineNewAttributeCard() {
 					{newStringAttributePossibleInputs}
 					<button
 						onClick={() => {
-							console.log(newAttribute.name, possibleAttributes)
 							setNewStringAttributePossibleInputs((prev) => {
 								return [
 									...prev,
@@ -147,7 +146,15 @@ export default function DefineNewAttributeCard() {
 							).filter((i) => i !== "")
 							const tmpSet = new Set(tmpArr)
 							return tmpSet.size < tmpArr.length
-						})())
+						})()) ||
+					(() => {
+						for (let ii = 0; ii < possibleAttributes.length; ii++) {
+							if (possibleAttributes[ii].name === newAttribute.name) {
+								return true
+							}
+						}
+						return false
+					})()
 				}
 				onClick={() =>
 					newAttribute.type === "string"

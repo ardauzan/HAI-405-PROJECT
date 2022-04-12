@@ -1,4 +1,4 @@
-import styles from "./index.module.sass"
+import styles from "./Home.module.sass"
 
 const { container, heading, heading2, button, heading3 } = styles
 
