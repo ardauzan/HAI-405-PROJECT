@@ -9,6 +9,8 @@
 		"aaron-bond.better-comments",
 		"2gua.rainbow-brackets",
 		"timonwong.shellcheck",
-		"shakram02.bash-beautify"
+		"shakram02.bash-beautify",
+		"github.remotehub",
+		"GitHub.github-vscode-theme"
 	]
 }

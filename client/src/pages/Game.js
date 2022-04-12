@@ -1,6 +1,6 @@
+import { Navigate } from "react-router-dom"
 import { useRecoilValue } from "recoil"
 import { internalServerErrorCaughtState } from "../store"
-import { Navigate } from "react-router-dom"
 import styles from "./Game.module.sass"
 
 const { container, heading, description } = styles

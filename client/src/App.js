@@ -1,9 +1,8 @@
 import { Suspense, lazy } from "react"
-import Store from "./store"
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom"
+import Store from "./store"
 import fallbacks from "./pages/fallbacks"
-import { Header } from "./components"
-import { ErrorBoundary, Footer } from "./components"
+import { Header, ErrorBoundary, Footer } from "./components"
 
 const Game = lazy(() => import("./pages/Game"))
 const Generator = lazy(() => import("./pages/Generator"))

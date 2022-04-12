@@ -1,5 +1,4 @@
 import PropTypes from "prop-types"
-
 import styles from "./FileSelectorCard.module.sass"
 
 const { container, heading, content, description } = styles
@@ -8,9 +7,7 @@ export default function FileSelectorCard({ selectedFileCount }) {
 	return (
 		<article className={container}>
 			<h3 className={heading}>
-				{selectedFileCount >= 6 && selectedFileCount <= 24
-					? "Selection Details"
-					: "Invalid selection"}
+				{selectedFileCount >= 6 && selectedFileCount <= 24 ? "Selection Details" : "Invalid selection"}
 			</h3>
 			<section className={content}>
 				<p className={description}>

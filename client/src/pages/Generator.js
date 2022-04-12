@@ -1,7 +1,7 @@
+import { Navigate } from "react-router-dom"
 import { useRecoilValue } from "recoil"
 import { filesSelectedState, internalServerErrorCaughtState } from "../store"
 import { generatorViews } from "../components"
-import { Navigate } from "react-router-dom"
 import styles from "./Game.module.sass"
 
 const { AttributeSelectionView, FileSelectionView } = generatorViews

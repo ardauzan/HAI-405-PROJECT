@@ -1,13 +1,33 @@
 {
+	"editor.cursorStyle": "block-outline",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.codeActionsOnSave": {
 		"source.fixAll.prettier": true
 	},
+	"editor.formatOnSave": true,
 	"prettier.htmlWhitespaceSensitivity": "strict",
 	"prettier.trailingComma": "none",
 	"prettier.semi": false,
 	"prettier.useTabs": true,
-	"editor.formatOnSave": true,
+	"prettier.arrowParens": "avoid",
+	"prettier.jsxBracketSameLine": true,
+	"prettier.quoteProps": "consistent",
+	"prettier.tabWidth": 6,
+	"prettier.printWidth": 125,
+	"prettier.proseWrap": "preserve",
+	"prettier.withNodeModules": false,
+	"eslint.alwaysShowStatus": true,
+	"eslint.codeAction.showDocumentation": {},
+	"eslint.codeActionsOnSave.mode": "all",
+	"eslint.format.enable": false,
+	"eslint.useESLintClass": true,
+	"gitlens.defaultGravatarsStyle": "identicon",
+	"gitlens.outputLevel": "verbose",
+	"gitlens.plusFeatures.enabled": false,
+	"gitlens.showWelcomeOnInstall": false,
+	"gitlens.showWhatsNewAfterUpgrades": false,
+	"gitlens.virtualRepositories.enabled": false,
+	"gitlens.codeLens.includeSingleLineSymbols": true,
 	"sass.disableUnitCompletion": false,
 	"[sass]": {
 		"editor.defaultFormatter": "syler.sass-indented"
@@ -15,10 +35,13 @@
 	"errorLens.delay": 650,
 	"errorLens.enableOnDiffView": true,
 	"errorLens.statusBarMessageType": "closestSeverity",
-	"editor.cursorStyle": "block-outline",
+	"better-comments.highlightPlainText": true,
+	"better-comments.multilineComments": false,
 	"shellcheck.run": "onSave",
 	"shellcheck.useWorkspaceRootAsCwd": true,
 	"[shellscript]": {
 		"editor.defaultFormatter": "shakram02.bash-beautify"
-	}
+	},
+	"bashBeautify.tabSize": 6,
+	"githubRepositories.logLevel": "info"
 }

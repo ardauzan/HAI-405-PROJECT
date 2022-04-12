@@ -2,7 +2,7 @@
 
 import axios from "axios"
 
-export const uploadImagesToBackend = async selectedImages => {
+export const uploadImagesToBackend = selectedImages => {
 	console.time("uploadImagesToBackend")
 	const formData = new FormData()
 	const len = selectedImages.length
@@ -17,11 +17,12 @@ export const uploadImagesToBackend = async selectedImages => {
 		.put("api/uploadimages", formData)
 		.then(res => {
 			console.info("status:", res.status)
-			return [...tmpArr]
+			return tmpArr
 		})
 		.catch(e => {
 			console.error(e)
-			return "500"
+			//return "500"
+			return tmpArr
 		})
 		.finally(() => {
 			console.timeEnd("uploadImagesToBackend")

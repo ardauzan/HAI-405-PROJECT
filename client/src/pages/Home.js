@@ -1,6 +1,6 @@
+import { Navigate } from "react-router-dom"
 import { useRecoilValue } from "recoil"
 import { internalServerErrorCaughtState } from "../store"
-import { Navigate } from "react-router-dom"
 import styles from "./Home.module.sass"
 
 const { container, heading, heading2, button, heading3 } = styles
