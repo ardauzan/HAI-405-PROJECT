@@ -5,6 +5,11 @@ export const fileDataState = atom({
 	default: []
 })
 
+export const internalServerErrorCaughtState = atom({
+	key: "internalServerErrorCaughtState",
+	default: false
+})
+
 export const filesCountState = selector({
 	key: "filesCountState",
 	get: ({ get }) => {

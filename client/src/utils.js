@@ -2,7 +2,7 @@
 
 import axios from "axios"
 
-export const uploadImagesToBackend = async (selectedImages) => {
+export const uploadImagesToBackend = async selectedImages => {
 	console.time("uploadImagesToBackend")
 	const formData = new FormData()
 	const len = selectedImages.length
@@ -15,32 +15,27 @@ export const uploadImagesToBackend = async (selectedImages) => {
 	}
 	return axios
 		.put("api/uploadimages", formData)
-		.then((res) => {
+		.then(res => {
 			console.info("status:", res.status)
 			return [...tmpArr]
 		})
-		.catch((e) => {
-			console.error("error:", e)
-			//return []
-			return [...tmpArr]
+		.catch(e => {
+			console.error(e)
+			return "500"
 		})
 		.finally(() => {
 			console.timeEnd("uploadImagesToBackend")
 		})
 }
 
-export const uploadConfigToBackend = (selectedConfig) => {
+export const uploadConfigToBackend = selectedConfig => {
 	console.time("uploadConfigToBackend")
-	axios
-		.put(
-			"api/uploadconfig",
-			JSON.stringify({ rows: 2, columns: 3, data: selectedConfig })
-		)
-		.then((res) => {
+	axios.put("api/uploadconfig", JSON.stringify({ rows: 2, columns: 3, data: selectedConfig }))
+		.then(res => {
 			console.info(res)
 			return selectedConfig
 		})
-		.catch((e) => {
+		.catch(e => {
 			console.error(e)
 			//return null
 			return selectedConfig

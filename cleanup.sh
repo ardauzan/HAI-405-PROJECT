@@ -2,6 +2,6 @@
 
 cd client && rm -rf build node_modules
 
-cd ../server && rm -rf node_modules
+cd ../server && rm -rf public/images  && rm -rf node_modules
 
-echo "Cleaned up.."
+echo "Cleaned up."
