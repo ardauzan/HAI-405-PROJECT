@@ -1,7 +1,5 @@
 #!/bin/sh
 
-cd client && rm -rf build node_modules
-
-cd ../server && rm -rf public/images  && rm -rf node_modules
+rm -rf client/build client/node_modules server/public/images server/public/config.json server/node_modules
 
 echo "Cleaned up."

@@ -1,3 +1,8 @@
+import { ErrorBoundary } from ".."
 export default function Header() {
-	return <header>ss</header>
+	return (
+		<ErrorBoundary level='base'>
+			<header>ss</header>
+		</ErrorBoundary>
+	)
 }

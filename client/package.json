@@ -19,7 +19,6 @@
 		"react-router-dom": "^6.2.2",
 		"react-scripts": "5.0.0",
 		"recoil": "^0.7.0",
-		"recoil-sync": "^0.0.0",
 		"sass": "^1.49.9",
 		"web-vitals": "^2.1.4"
 	},
@@ -31,8 +30,8 @@
 		"eslint-plugin-react-hooks": "^4.3.0"
 	},
 	"engines": {
-		"node": ">=17.0.0",
-		"npm": ">=8.0.0"
+		"node": ">=16.14.2",
+		"npm": ">=8.5.0"
 	},
 	"os": [
 		"darwin",

@@ -1,7 +1,10 @@
+import { ErrorBoundary } from ".."
 export default function Footer() {
 	return (
-		<footer>
-			<ol></ol>
-		</footer>
+		<ErrorBoundary level='base'>
+			<footer>
+				<ol></ol>
+			</footer>
+		</ErrorBoundary>
 	)
 }

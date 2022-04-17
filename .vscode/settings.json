@@ -15,7 +15,10 @@
 	"prettier.tabWidth": 6,
 	"prettier.printWidth": 125,
 	"prettier.proseWrap": "preserve",
-	"prettier.withNodeModules": false,
+	"prettier.enableDebugLogs": true,
+	"prettier.jsxSingleQuote": true,
+	"prettier.useEditorConfig": false,
+	"prettier.withNodeModules": true,
 	"eslint.alwaysShowStatus": true,
 	"eslint.codeAction.showDocumentation": {},
 	"eslint.codeActionsOnSave.mode": "all",
@@ -36,12 +39,70 @@
 	"errorLens.enableOnDiffView": true,
 	"errorLens.statusBarMessageType": "closestSeverity",
 	"better-comments.highlightPlainText": true,
-	"better-comments.multilineComments": false,
+	"better-comments.multilineComments": true,
 	"shellcheck.run": "onSave",
 	"shellcheck.useWorkspaceRootAsCwd": true,
 	"[shellscript]": {
 		"editor.defaultFormatter": "shakram02.bash-beautify"
 	},
 	"bashBeautify.tabSize": 6,
-	"githubRepositories.logLevel": "info"
+	"githubRepositories.logLevel": "info",
+	"remoteHub.experimental.useSimplifiedMerge": true,
+	"remoteHub.richNavigation.enabled": true,
+	"better-comments.tags": [
+		{
+			"tag": "!",
+			"color": "#FF2D00",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			"tag": "note",
+			"color": "#FF8C00",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			"tag": "*",
+			"color": "#98C379",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			"tag": "shared",
+			"color": "#a503fc",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			"tag": "level",
+			"color": "#7fa818",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			"tag": "internal",
+			"color": "#8af7b9",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		}
+	]
 }
