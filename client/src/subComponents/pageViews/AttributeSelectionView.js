@@ -64,7 +64,6 @@ export default function AttributeSelectionView() {
 				</button>
 				<button
 					hidden={definitionOpen}
-					disabled={!possibleAttributes.length}
 					onClick={() => {
 						console.log(fileData, possibleAttributes)
 					}}>

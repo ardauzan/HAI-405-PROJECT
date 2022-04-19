@@ -35,8 +35,8 @@ export const _uploadConfigToBackend = async (fileData, setInternalServerErrorCau
 export const _canNotFinishDefining = (newAttribute, newStringAttributePossibleValues, possibleAttributes) =>
 	!newAttribute.name ||
 	!/^[A-Za-z]+$/.test(newAttribute.name) ||
-	Object.values(newStringAttributePossibleValues).filter(i => i !== "" && !/^[A-Za-z]+$/.test(i)).length ||
-	(newAttribute.type === "string" && Object.values(newStringAttributePossibleValues).filter(i => i !== "").length < 1) ||
+	(newAttribute.type === "string" &&
+		Object.values(newStringAttributePossibleValues).filter(i => i !== "" && /^[A-Za-z]+$/.test(i)).length < 2) ||
 	(() => {
 		const tmpArr = Object.values(newStringAttributePossibleValues).filter(i => i !== "")
 		const tmpSet = new Set(tmpArr)
