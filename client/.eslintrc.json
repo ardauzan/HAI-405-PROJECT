@@ -19,7 +19,7 @@
 	],
 	"env": { "browser": true, "es2022": true },
 	"rules": {
-		"no-console": "warn",
+		"no-console": "error",
 		"react-hooks/exhaustive-deps": [
 			"error",
 			{ "additionalHooks": "(useRecoilCallback|useRecoilTransaction_UNSTABLE)" }

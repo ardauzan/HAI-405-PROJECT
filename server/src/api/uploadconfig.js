@@ -1,12 +1,11 @@
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 const express = require("express")
+const bodyParser = require("body-parser")
 const uploadconfig = express.Router()
 
-uploadconfig.get("/", (req, res, next) => {
-	res.status(200).send("OK")
-})
-
-uploadconfig.put("/", undefined, (req, res, next) => {
-	res.status(200).send("OK")
+uploadconfig.put("/", bodyParser.json(), (req, res, next) => {
+	console.log(req.body)
 })
 
 module.exports = uploadconfig

@@ -22,8 +22,7 @@ export const uploadImagesToBackend = selectedImages => {
 		})
 		.catch(e => {
 			er = e
-			return tmpArr
-			//return "500"
+			return "500"
 		})
 		.finally(() => {
 			console.assert(status === 200 && er === undefined, "(uploadImagesToBackend) Successful")
@@ -33,7 +32,8 @@ export const uploadImagesToBackend = selectedImages => {
 export const uploadConfigToBackend = selectedConfig => {
 	let status = ""
 	let er = undefined
-	axios.put("api/uploadconfig", JSON.stringify({ rows: 2, columns: 3, data: selectedConfig }))
+	return axios
+		.put("api/uploadconfig", selectedConfig)
 		.then(res => {
 			status = res.status
 			return selectedConfig

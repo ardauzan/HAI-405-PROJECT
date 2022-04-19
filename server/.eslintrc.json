@@ -9,7 +9,7 @@
 		"es2022": true
 	},
 	"rules": {
-		"no-console": "warn",
+		"no-console": "error",
 		"no-unused-vars": ["error", { "argsIgnorePattern": "next" }]
 	}
 }

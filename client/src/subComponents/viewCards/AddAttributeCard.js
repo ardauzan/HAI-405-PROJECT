@@ -71,12 +71,6 @@ export default function AddAttributeCard() {
 					}>
 					Finish Defining
 				</button>
-				<button
-					onClick={() =>
-						console.log(newAttribute, possibleAttributes, newStringAttributePossibleValues)
-					}>
-					log
-				</button>
 			</article>
 		</ErrorBoundary>
 	)

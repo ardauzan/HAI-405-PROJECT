@@ -64,17 +64,6 @@ export default function EditAttributeCard() {
 					onClick={() => finishEditing()}>
 					Finish Editing
 				</button>
-				<button
-					onClick={() =>
-						console.log(
-							newAttribute,
-							possibleAttributes,
-							possibleValuesSelectedForEditing,
-							newStringAttributePossibleValues
-						)
-					}>
-					log
-				</button>
 			</article>
 		</ErrorBoundary>
 	)

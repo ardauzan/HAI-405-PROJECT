@@ -1,5 +1,6 @@
 const express = require("express")
 const multer = require("multer")
+const fse = require("fs-extra")
 const uploadimages = express.Router()
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
@@ -9,10 +10,12 @@ const storage = multer.diskStorage({
 		cb(null, file.originalname)
 	}
 })
-const upload = multer({ storage: storage })
-uploadimages.get("/", (req, res, next) => {
-	res.status(200).send("OK")
+uploadimages.use((req, res, next) => {
+	fse.removeSync("public/images", () => {})
+	fse.mkdirSync("public/images")
+	next()
 })
+const upload = multer({ storage: storage })
 uploadimages.put("/", upload.array("image", 24), (req, res, next) => {
 	res.status(200).send("OK")
 })

@@ -8,7 +8,7 @@ import {
 	possibleAttributesState,
 	internalServerErrorCaughtState
 } from "../../state"
-import { _uploadConfigToBackend } from "../../utils"
+import { _uploadConfigToBackend, _startOver } from "../../utils"
 import { ErrorBoundary } from "../../components"
 import { AttributeSelectorCard, AddAttributeCard, EditAttributeCard } from ".."
 import styles from "./AttributeSelectionView.module.sass"
@@ -18,20 +18,28 @@ const { container, heading } = styles
 export default function AttributeSelectionView() {
 	const [fileData, setFileData] = useRecoilState(fileDataState)
 	const [index, setIndex] = useRecoilState(indexState)
-	const [possibleAttributes, setPossibleAttributes] = useRecoilState(possibleAttributesState)
+	const setPossibleAttributes = useSetRecoilState(possibleAttributesState)
 	const setInternalServerErrorCaught = useSetRecoilState(internalServerErrorCaughtState)
 	const filesCount = useRecoilValue(filesCountState)
 	const addAttributeOpen = useRecoilValue(addAttributeOpenState)
 	const editAttributeOpen = useRecoilValue(editAttributeOpenState)
 	const [imgNo, imgAlt, imgSrc] = [index + 1, "image-" + (index + 1), "images/image-" + (index + 1) + ".png"]
-	const canNotUploadConfig = fileData.includes({})
+	const canNotUploadConfig = () => {
+		for (let i = 0; i < fileData.length; i++) {
+			if (Object.keys(fileData[i]).length === 0) return true
+		}
+		return false
+	}
 	const [nextImageLogic, nextImageText, disabled] =
 		index + 1 < filesCount
 			? [() => setIndex(prev => prev + 1), "Next image!", false]
 			: [
-					() => _uploadConfigToBackend(fileData, setInternalServerErrorCaught),
+					() =>
+						_uploadConfigToBackend(fileData, setInternalServerErrorCaught, () =>
+							_startOver(setPossibleAttributes, setFileData, setIndex)
+						),
 					"Submit attributes!",
-					canNotUploadConfig
+					canNotUploadConfig()
 			  ]
 	const definitionOpen = addAttributeOpen || editAttributeOpen
 	const previousImage = (index, setIndex) => (index > 0 ? setIndex(prev => prev - 1) : null)
@@ -59,20 +67,17 @@ export default function AttributeSelectionView() {
 				</button>
 				<button
 					hidden={definitionOpen}
-					disabled={!possibleAttributes.length}
 					onClick={() => {
-						setPossibleAttributes([])
-						setFileData([])
-						setIndex(0)
+						_startOver(setPossibleAttributes, setFileData, setIndex)
 					}}>
 					Start over!
 				</button>
 				<button
 					hidden={definitionOpen}
 					onClick={() => {
-						console.log(fileData, possibleAttributes)
+						console.log(fileData) /* eslint-disable-line no-console */
 					}}>
-					log
+					Log fileData
 				</button>
 			</section>
 		</ErrorBoundary>

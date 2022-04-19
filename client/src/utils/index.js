@@ -22,13 +22,18 @@ export const _uploadImagesToBackend = async (selectedImages, setFileData, setInt
 		() => setInternalServerErrorCaught(true)
 	)
 }
-export const _uploadConfigToBackend = async (fileData, setInternalServerErrorCaught) => {
+export const _uploadConfigToBackend = async (fileData, setInternalServerErrorCaught, _startOver) => {
 	const res = await uploadConfigToBackend(fileData)
 	return __endpointCall(
 		!(typeof res === "string"),
-		() => console.log(res),
+		() => _startOver(),
 		() => setInternalServerErrorCaught(true)
 	)
+}
+export const _startOver = (setPossibleAttributes, setFileData, setIndex) => {
+	setPossibleAttributes([])
+	setFileData([])
+	setIndex(0)
 }
 // level (generic) | (card) ##########################################
 // shared #####################
