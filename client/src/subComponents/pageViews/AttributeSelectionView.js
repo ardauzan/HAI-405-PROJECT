@@ -24,10 +24,15 @@ export default function AttributeSelectionView() {
 	const addAttributeOpen = useRecoilValue(addAttributeOpenState)
 	const editAttributeOpen = useRecoilValue(editAttributeOpenState)
 	const [imgNo, imgAlt, imgSrc] = [index + 1, "image-" + (index + 1), "images/image-" + (index + 1) + ".png"]
-	const [nextImageLogic, nextImageText] =
+	const canNotUploadConfig = fileData.includes({})
+	const [nextImageLogic, nextImageText, disabled] =
 		index + 1 < filesCount
-			? [() => setIndex(prev => prev + 1), "Next image!"]
-			: [_uploadConfigToBackend(fileData, setInternalServerErrorCaught), "Submit attributes!"]
+			? [() => setIndex(prev => prev + 1), "Next image!", false]
+			: [
+					() => _uploadConfigToBackend(fileData, setInternalServerErrorCaught),
+					"Submit attributes!",
+					canNotUploadConfig
+			  ]
 	const definitionOpen = addAttributeOpen || editAttributeOpen
 	const previousImage = (index, setIndex) => (index > 0 ? setIndex(prev => prev - 1) : null)
 	return (
@@ -49,7 +54,7 @@ export default function AttributeSelectionView() {
 				<button hidden={definitionOpen} disabled={index <= 0} onClick={() => previousImage(index, setIndex)}>
 					Previous image!
 				</button>
-				<button hidden={definitionOpen} onClick={() => nextImageLogic()}>
+				<button hidden={definitionOpen} disabled={disabled} onClick={() => nextImageLogic()}>
 					{nextImageText}
 				</button>
 				<button

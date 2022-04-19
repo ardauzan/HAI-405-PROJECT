@@ -48,30 +48,35 @@ export default function AttributeSelectionChoiceFrame({ v, i }) {
 		})
 	const setFileDataBoolean = (v, setFileData, index) =>
 		setFileData(prev => {
-			let tmpArr = prev
-			let tmpObj = tmpArr[index]
-			tmpObj = { ...tmpObj, [v.name]: !prev[index][v.name] }
-			return _replaceObjectElementInArrayAtIndex(tmpArr, index, tmpObj)
+			let tmpObj = prev[index]
+			const { [v.name]: val, ...rest } = tmpObj /* eslint-disable-line no-unused-vars */
+			if (prev[index][v.name]) {
+				tmpObj = rest
+				return _replaceObjectElementInArrayAtIndex(prev, index, tmpObj)
+			}
+			tmpObj = { ...tmpObj, [v.name]: true }
+			return _replaceObjectElementInArrayAtIndex(prev, index, tmpObj)
 		})
 	const setFileDataNumber = (e, v, setFileData, index) =>
 		setFileData(prev => {
-			let tmpArr = prev
-			let tmpObj = tmpArr[index] ? tmpArr[index] : {}
+			let tmpObj = prev[index]
+			const { [v.name]: val, ...rest } = tmpObj /* eslint-disable-line no-unused-vars */
+			if (e.target.value === "0") {
+				tmpObj = rest
+				return _replaceObjectElementInArrayAtIndex(prev, index, tmpObj)
+			}
 			tmpObj = {
 				...tmpObj,
 				[v.name]: Number(e.target.value)
 			}
-			return _replaceObjectElementInArrayAtIndex(tmpArr, index, tmpObj)
+			return _replaceObjectElementInArrayAtIndex(prev, index, tmpObj)
 		})
 	const resetChoice = (v, setFileData, index) =>
 		setFileData(prev => {
-			let tmpArr2 = prev
-			let tmpObj = tmpArr2[index]
-			tmpObj = {
-				...tmpObj,
-				[v.name]: ""
-			}
-			return _replaceObjectElementInArrayAtIndex(tmpArr2, index, tmpObj)
+			let tmpObj = prev[index]
+			const { [v.name]: val, ...rest } = tmpObj /* eslint-disable-line no-unused-vars */
+			tmpObj = rest
+			return _replaceObjectElementInArrayAtIndex(prev, index, tmpObj)
 		})
 	return (
 		<ErrorBoundary level='frame'>
