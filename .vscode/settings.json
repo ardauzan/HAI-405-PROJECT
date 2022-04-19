@@ -103,6 +103,15 @@
 			"backgroundColor": "transparent",
 			"bold": false,
 			"italic": false
+		},
+		{
+			"tag": "external",
+			"color": "#FC4103",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
 		}
 	]
 }

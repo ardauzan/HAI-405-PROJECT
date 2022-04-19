@@ -1,13 +1,13 @@
 import { atom, selector } from "recoil"
 
-export const fileDataState = atom({
-	key: "fileDataState",
-	default: []
-})
-
 export const internalServerErrorCaughtState = atom({
 	key: "internalServerErrorCaughtState",
 	default: false
+})
+
+export const fileDataState = atom({
+	key: "fileDataState",
+	default: []
 })
 
 export const addAttributeOpenState = atom({

@@ -9,7 +9,7 @@ import {
 	possibleValuesSelectedForEditingState
 } from "../../state"
 import { StringAttributeEditionStack } from ".."
-import { _canNotFinishDefining, _finishEditing } from "../../logic"
+import { _canNotFinishDefining, _finishDefining } from "../../utils"
 
 export default function EditAttributeCard() {
 	const [newAttribute, setNewAttribute] = useState({ type: "string" })
@@ -19,6 +19,24 @@ export default function EditAttributeCard() {
 	const setEditAttribute = useSetRecoilState(editAttributeState)
 	const attributeSelectedForEditing = useRecoilValue(attributeSelectedForEditingState)
 	const possibleValuesSelectedForEditing = useRecoilValue(possibleValuesSelectedForEditingState)
+
+	const finishEditing = () => {
+		_finishDefining(newAttribute, setPossibleAttributes, newStringAttributePossibleValues, setEditAttribute, "edit")
+		setFileData(prev => {
+			let tmpArr = []
+			let tmpObj = {}
+			for (let i = 0; i < prev.length; i++) {
+				tmpObj = prev[i]
+				let { [attributeSelectedForEditing]: val, ...rest } = tmpObj
+				if (!Object.values(newStringAttributePossibleValues).includes(val)) {
+					tmpObj = rest
+				}
+				tmpArr.push(tmpObj)
+			}
+			return tmpArr
+		})
+	}
+
 	useEffect(() => {
 		setNewAttribute(prev => ({
 			...prev,
@@ -43,16 +61,7 @@ export default function EditAttributeCard() {
 						newStringAttributePossibleValues,
 						possibleAttributes
 					)}
-					onClick={() =>
-						_finishEditing(
-							setFileData,
-							newAttribute,
-							possibleAttributes,
-							setPossibleAttributes,
-							newStringAttributePossibleValues,
-							setEditAttribute
-						)
-					}>
+					onClick={() => finishEditing()}>
 					Finish Editing
 				</button>
 				<button

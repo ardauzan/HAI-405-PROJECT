@@ -1,12 +1,13 @@
 import PropTypes from "prop-types"
 import { ErrorBoundary } from "../../components"
-import { _renderFileSelectorText } from "../../logic"
 import styles from "./FileSelectorCard.module.sass"
 
 const { container, heading, content, description } = styles
 
-export default function FileSelectorCard({ selectedFileCount }) {
-	const [headingTxt, descriptionTxt] = _renderFileSelectorText(selectedFileCount)
+export default function FileSelectorCard({ selectedImagesLen, canNotUploadImagesToBackend }) {
+	const [headingTxt, descriptionTxt] = !canNotUploadImagesToBackend
+		? ["Selection Details", `Amount of images chosen: ${selectedImagesLen}`]
+		: ["Invalid selection", "Choose image files to use. (At least 6, at most 24)"]
 	return (
 		<ErrorBoundary level='card'>
 			<article className={container}>
@@ -20,5 +21,6 @@ export default function FileSelectorCard({ selectedFileCount }) {
 }
 
 FileSelectorCard.propTypes = {
-	selectedFileCount: PropTypes.number.isRequired
+	selectedImagesLen: PropTypes.number.isRequired,
+	canNotUploadImagesToBackend: PropTypes.bool.isRequired
 }
