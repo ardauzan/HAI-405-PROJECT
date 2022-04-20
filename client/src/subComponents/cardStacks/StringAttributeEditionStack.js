@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil"
 import { StringAttributeDefinitionFrame } from ".."
 import { ErrorBoundary } from "../../components"
 import { possibleValuesSelectedForEditingState } from "../../state"
-
 export default function StringAttributeEditionStack({ setNewStringAttributePossibleValues }) {
 	const [newStringAttributePossibleInputs, setNewStringAttributePossibleInputs] = useState([])
 	const [newStringAttributePossibleInputsCount, setNewStringAttributePossibleInputsCount] = useState(0)
@@ -47,7 +46,6 @@ export default function StringAttributeEditionStack({ setNewStringAttributePossi
 		</ErrorBoundary>
 	)
 }
-
 StringAttributeEditionStack.propTypes = {
 	setNewStringAttributePossibleValues: PropTypes.func.isRequired
 }

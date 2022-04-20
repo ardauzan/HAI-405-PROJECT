@@ -1,5 +1,5 @@
-**/node_modules
-client/build
+**/node_modules/
+client/build/
 .DS_Store
-server/public/images
+server/public/images/
 server/public/config.json

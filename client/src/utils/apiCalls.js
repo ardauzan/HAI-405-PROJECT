@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
-
 import axios from "axios"
-
+// info uploadImagesToBackend calls <api/uploadimages> with method <PUT>
 export const uploadImagesToBackend = selectedImages => {
 	const formData = new FormData()
 	const len = selectedImages.length
@@ -21,14 +20,14 @@ export const uploadImagesToBackend = selectedImages => {
 			return tmpArr
 		})
 		.catch(e => {
-			er = e
+			console.error(e)
 			return "500"
 		})
 		.finally(() => {
 			console.assert(status === 200 && er === undefined, "(uploadImagesToBackend) Successful")
 		})
 }
-
+// info uploadConfigToBackend calls <api/uploadconfig> with method <PUT>
 export const uploadConfigToBackend = selectedConfig => {
 	let status = ""
 	let er = undefined

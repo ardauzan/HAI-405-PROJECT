@@ -1,8 +1,6 @@
 import { ErrorBoundary } from "../.."
 import styles from "./InternalServerError.module.sass"
-
 const { container, heading, description } = styles
-
 export default function InternalServerError() {
 	return (
 		<ErrorBoundary level='fallback'>

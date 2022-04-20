@@ -4,7 +4,6 @@ import { possibleAttributesState, addAttributeOpenState } from "../../state"
 import { ErrorBoundary } from "../../components"
 import { StringAttributeAdditionStack } from ".."
 import { _finishDefining, _canNotFinishDefining } from "../../utils"
-
 export default function AddAttributeCard() {
 	const [newAttribute, setNewAttribute] = useState({ type: "boolean" })
 	const [newStringAttributePossibleValues, setNewStringAttributePossibleValues] = useState({})

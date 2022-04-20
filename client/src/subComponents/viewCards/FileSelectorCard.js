@@ -1,9 +1,7 @@
 import PropTypes from "prop-types"
 import { ErrorBoundary } from "../../components"
 import styles from "./FileSelectorCard.module.sass"
-
 const { container, heading, content, description } = styles
-
 export default function FileSelectorCard({ selectedImagesLen, canNotUploadImagesToBackend }) {
 	const [headingTxt, descriptionTxt] = !canNotUploadImagesToBackend
 		? ["Selection Details", `Amount of images chosen: ${selectedImagesLen}`]
@@ -19,7 +17,6 @@ export default function FileSelectorCard({ selectedImagesLen, canNotUploadImages
 		</ErrorBoundary>
 	)
 }
-
 FileSelectorCard.propTypes = {
 	selectedImagesLen: PropTypes.number.isRequired,
 	canNotUploadImagesToBackend: PropTypes.bool.isRequired

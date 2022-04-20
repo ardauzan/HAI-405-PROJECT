@@ -1,4 +1,3 @@
-// ! import redirect coomponent
 import { Navigate } from "react-router-dom"
 // ! import api calls
 import { uploadImagesToBackend, uploadConfigToBackend } from "./apiCalls"

@@ -1,5 +1,4 @@
 import PropTypes from "prop-types"
-
 export default function Error({ level }) {
 	switch (level) {
 		case "root":
@@ -26,7 +25,6 @@ export default function Error({ level }) {
 			return <h6>Error!</h6>
 	}
 }
-
 Error.propTypes = {
 	level: PropTypes.string
 }

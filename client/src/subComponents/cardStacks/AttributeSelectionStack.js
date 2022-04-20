@@ -2,7 +2,6 @@ import { useRecoilState } from "recoil"
 import { ErrorBoundary } from "../../components"
 import { fileDataState, possibleAttributesState } from "../../state"
 import { AttributeSelectionFrame } from ".."
-
 export default function AttributeSelectionStack() {
 	const [fileData, setFileData] = useRecoilState(fileDataState)
 	const [possibleAttributes, setPossibleAttributes] = useRecoilState(possibleAttributesState)

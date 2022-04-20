@@ -69,15 +69,6 @@
 			"italic": false
 		},
 		{
-			"tag": "*",
-			"color": "#98C379",
-			"strikethrough": false,
-			"underline": false,
-			"backgroundColor": "transparent",
-			"bold": false,
-			"italic": false
-		},
-		{
 			"tag": "shared",
 			"color": "#a503fc",
 			"strikethrough": false,
@@ -107,6 +98,15 @@
 		{
 			"tag": "external",
 			"color": "#FC4103",
+			"strikethrough": false,
+			"underline": false,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			"tag": "info",
+			"color": "#98C379",
 			"strikethrough": false,
 			"underline": false,
 			"backgroundColor": "transparent",

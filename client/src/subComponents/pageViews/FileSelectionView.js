@@ -5,9 +5,7 @@ import { ErrorBoundary } from "../../components"
 import { FileSelectorCard } from "../"
 import { _uploadImagesToBackend } from "../../utils"
 import styles from "./FileSelectionView.module.sass"
-
 const { container, heading } = styles
-
 export default function FileSelectionView() {
 	const [selectedImages, setSelectedImages] = useState([])
 	const setFileData = useSetRecoilState(fileDataState)

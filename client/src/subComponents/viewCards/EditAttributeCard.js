@@ -10,7 +10,6 @@ import {
 } from "../../state"
 import { StringAttributeEditionStack } from ".."
 import { _canNotFinishDefining, _finishDefining } from "../../utils"
-
 export default function EditAttributeCard() {
 	const [newAttribute, setNewAttribute] = useState({ type: "string" })
 	const [newStringAttributePossibleValues, setNewStringAttributePossibleValues] = useState({})
@@ -19,7 +18,6 @@ export default function EditAttributeCard() {
 	const setEditAttribute = useSetRecoilState(editAttributeState)
 	const attributeSelectedForEditing = useRecoilValue(attributeSelectedForEditingState)
 	const possibleValuesSelectedForEditing = useRecoilValue(possibleValuesSelectedForEditingState)
-
 	const finishEditing = () => {
 		_finishDefining(newAttribute, setPossibleAttributes, newStringAttributePossibleValues, setEditAttribute, "edit")
 		setFileData(prev => {
@@ -36,7 +34,6 @@ export default function EditAttributeCard() {
 			return tmpArr
 		})
 	}
-
 	useEffect(() => {
 		setNewAttribute(prev => ({
 			...prev,

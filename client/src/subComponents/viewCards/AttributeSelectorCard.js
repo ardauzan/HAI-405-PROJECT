@@ -2,7 +2,6 @@ import { useSetRecoilState } from "recoil"
 import { ErrorBoundary } from "../../components"
 import { addAttributeOpenState } from "../../state"
 import { AttributeSelectionStack } from ".."
-
 export default function AttributeSelectorCard() {
 	const setAddAttributeOpen = useSetRecoilState(addAttributeOpenState)
 	return (

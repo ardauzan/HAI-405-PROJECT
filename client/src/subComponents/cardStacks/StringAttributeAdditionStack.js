@@ -2,7 +2,6 @@ import { useState } from "react"
 import PropTypes from "prop-types"
 import { ErrorBoundary } from "../../components"
 import { StringAttributeDefinitionFrame } from ".."
-
 export default function StringAttributeAdditionStack({ setNewStringAttributePossibleValues }) {
 	const [newStringAttributePossibleInputsCount, setNewStringAttributePossibleInputsCount] = useState(0)
 	const [newStringAttributePossibleInputs, setNewStringAttributePossibleInputs] = useState([])
@@ -27,7 +26,6 @@ export default function StringAttributeAdditionStack({ setNewStringAttributePoss
 		</ErrorBoundary>
 	)
 }
-
 StringAttributeAdditionStack.propTypes = {
 	setNewStringAttributePossibleValues: PropTypes.func.isRequired
 }

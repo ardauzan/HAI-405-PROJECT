@@ -1,19 +1,14 @@
 /* eslint-disable no-console */
-
-const path = require("path")
 const express = require("express")
-const api = require("./api")
 const fse = require("fs-extra")
-
+const path = require("path")
+const api = require("./api")
 const app = express()
 let port = 5000
-
 try {
-	if (!fse.existsSync("public/config.json")) {
-		throw "config missing"
-	}
+	if (!fse.existsSync("public/config.json")) throw "config missing"
 } catch {
-	fse.copyFile("public/config-default.json", "public/config.json", 0, () => {})
+	fse.copyFileSync("public/config-default.json", "public/config.json", 0, () => {})
 	fse.removeSync("public/images", () => {})
 	fse.copySync("public/images-default", "public/images", { overwrite: true }, () => {})
 } finally {
@@ -22,7 +17,6 @@ try {
 		next()
 	})
 	app.use("/api", api)
-
 	app.use(express.static(path.join(__dirname, "../../client", "build")))
 	app.use(express.static("public"))
 	app.use((req, res, next) => {

@@ -12,9 +12,7 @@ import { _uploadConfigToBackend, _startOver } from "../../utils"
 import { ErrorBoundary } from "../../components"
 import { AttributeSelectorCard, AddAttributeCard, EditAttributeCard } from ".."
 import styles from "./AttributeSelectionView.module.sass"
-
 const { container, heading } = styles
-
 export default function AttributeSelectionView() {
 	const [fileData, setFileData] = useRecoilState(fileDataState)
 	const [index, setIndex] = useRecoilState(indexState)
@@ -25,9 +23,7 @@ export default function AttributeSelectionView() {
 	const editAttributeOpen = useRecoilValue(editAttributeOpenState)
 	const [imgNo, imgAlt, imgSrc] = [index + 1, "image-" + (index + 1), "images/image-" + (index + 1) + ".png"]
 	const canNotUploadConfig = () => {
-		for (let i = 0; i < fileData.length; i++) {
-			if (Object.keys(fileData[i]).length === 0) return true
-		}
+		for (let i = 0; i < fileData.length; i++) if (Object.keys(fileData[i]).length === 0) return true
 		return false
 	}
 	const [nextImageLogic, nextImageText, disabled] =

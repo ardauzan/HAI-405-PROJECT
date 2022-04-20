@@ -1,8 +1,6 @@
 import { ErrorBoundary } from "../.."
 import styles from "./Loading.module.sass"
-
 const { container, heading, description } = styles
-
 export default function Loading() {
 	return (
 		<ErrorBoundary level='fallback'>

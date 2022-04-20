@@ -1,9 +1,7 @@
 /* eslint-disable no-console */
-
 import { Component } from "react"
 import PropTypes from "prop-types"
 import { Error } from "../subComponents"
-
 export default class ErrorBoundary extends Component {
 	constructor(props) {
 		super(props)
@@ -23,7 +21,6 @@ export default class ErrorBoundary extends Component {
 		return this.props.children
 	}
 }
-
 ErrorBoundary.propTypes = {
 	children: PropTypes.node.isRequired,
 	level: PropTypes.string

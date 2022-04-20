@@ -1,15 +1,15 @@
 import { Suspense, lazy } from "react"
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom"
 import components, { ErrorBoundary } from "./components"
-
-const { baseComponents, fallbacks, Store } = components
-
+// info destructre imports
+const { baseComponents, fallbackPages, Store } = components
 const { Footer, Header } = baseComponents
-const { InternalServerError, Loading, PageNotFound } = fallbacks
-const Game = lazy(() => import("./components/pages/Game"))
-const Generator = lazy(() => import("./components/pages/Generator"))
-const Home = lazy(() => import("./components/pages/Home"))
-
+const { InternalServerError, Loading, PageNotFound } = fallbackPages
+// info lazy load pages for ideal time to first byte
+const Game = lazy(() => import("./components/pageComponents/Game"))
+const Generator = lazy(() => import("./components/pageComponents/Generator"))
+const Home = lazy(() => import("./components/pageComponents/Home"))
+// info define App
 export default function App() {
 	return (
 		<ErrorBoundary level='root'>

@@ -1,8 +1,6 @@
 import { ErrorBoundary } from "../.."
 import styles from "./PageNotFound.module.sass"
-
 const { container, heading, description } = styles
-
 export default function PageNotFound() {
 	return (
 		<ErrorBoundary level='fallback'>

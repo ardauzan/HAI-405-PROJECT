@@ -3,7 +3,48 @@ export default function Footer() {
 	return (
 		<ErrorBoundary level='base'>
 			<footer>
-				<ol></ol>
+				<ol>
+					<li>
+						<ol>
+							<li>
+								<p></p>
+							</li>
+							<li>
+								<p></p>
+							</li>
+							<li>
+								<p></p>
+							</li>
+						</ol>
+					</li>
+					<li>
+						<ol>
+							<li>
+								<p></p>
+							</li>
+							<li>
+								<p></p>
+							</li>
+							<li>
+								<p></p>
+							</li>
+						</ol>
+					</li>
+					<li>
+						<ol>
+							<li>
+								<p></p>
+							</li>
+							<li>
+								<p></p>
+							</li>
+							<li>
+								<p></p>
+							</li>
+						</ol>
+					</li>
+				</ol>
+				<p>UNLICENSED</p>
 			</footer>
 		</ErrorBoundary>
 	)
