@@ -21,7 +21,8 @@ export const uploadImagesToBackend = selectedImages => {
 		})
 		.catch(e => {
 			console.error(e)
-			return "500"
+			return tmpArr
+			//return "500"
 		})
 		.finally(() => {
 			console.assert(status === 200 && er === undefined, "(uploadImagesToBackend) Successful")
