@@ -8,7 +8,7 @@ uploadconfig.get("/", (req, res, next) => {
 })
 uploadconfig.put("/", jsonParser, (req, res, next) => {
 	try {
-		fse.writeFileSync("public/config.json", req.body)
+		fse.writeFileSync("public/config.json", JSON.stringify(req.body))
 		res.status(200).send("OK")
 	} catch (e) {
 		console.error(e) /* eslint-disable-line no-console */
