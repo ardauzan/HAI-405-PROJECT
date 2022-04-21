@@ -1,13 +1,15 @@
-import { Navigate } from "react-router-dom"
 import { useRecoilValue } from "recoil"
 import { Helmet } from "react-helmet"
 import { ErrorBoundary } from ".."
 import { internalServerErrorCaughtState } from "../../state"
+import { _renderAsyncContent } from "../../utils"
+
 import styles from "./Game.module.sass"
 const { main, h1, p } = styles
 export default function Game() {
 	const internalServerErrorCaught = useRecoilValue(internalServerErrorCaughtState)
-	return !internalServerErrorCaught ? (
+	return _renderAsyncContent(
+		internalServerErrorCaught,
 		<ErrorBoundary level='page'>
 			<Helmet>
 				<title>Game</title>
@@ -18,7 +20,5 @@ export default function Game() {
 				<p className={p}>Game</p>
 			</main>
 		</ErrorBoundary>
-	) : (
-		<Navigate to='/500' />
 	)
 }
