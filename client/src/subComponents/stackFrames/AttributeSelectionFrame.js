@@ -120,7 +120,7 @@ export default function AttributeSelectionChoiceFrame({ v, i }) {
 									<button
 										disabled={!fileData[index][v.name]}
 										onClick={() => resetChoice(v, setFileData, index)}>
-										Reset choice
+										Suprimmer le choix
 									</button>
 									<button
 										value={v.name}
@@ -132,7 +132,7 @@ export default function AttributeSelectionChoiceFrame({ v, i }) {
 												setPossibleAttributes
 											)
 										}>
-										Edit values
+										Modifier les valeurs
 									</button>
 								</>
 							)

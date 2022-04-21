@@ -31,7 +31,7 @@ export default function AttributeSelectionStack() {
 							}
 							setFileData(tmpArr)
 						}}>
-						Delete attribute
+						Supprimer Attribut
 					</button>
 				</article>
 			))}

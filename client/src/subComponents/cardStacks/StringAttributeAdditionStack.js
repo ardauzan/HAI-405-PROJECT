@@ -7,7 +7,7 @@ export default function StringAttributeAdditionStack({ setNewStringAttributePoss
 	const [newStringAttributePossibleInputs, setNewStringAttributePossibleInputs] = useState([])
 	return (
 		<ErrorBoundary level='stack'>
-			<h4>Possible Values:</h4>
+			<h4>Valeurs Possibles :</h4>
 			{newStringAttributePossibleInputs}
 			<button
 				onClick={() => {
@@ -21,7 +21,7 @@ export default function StringAttributeAdditionStack({ setNewStringAttributePoss
 					])
 					setNewStringAttributePossibleInputsCount(prev => prev + 1)
 				}}>
-				New Value
+				Nouvelle Valeur
 			</button>
 		</ErrorBoundary>
 	)

@@ -7,14 +7,14 @@ export default function AttributeSelectorCard() {
 	return (
 		<ErrorBoundary level='card'>
 			<article>
-				<h3>Attribute Selector</h3>
+				<h3>Sélecteur Des Attributs</h3>
 				<section>
-					<h4>Select attibutes for image:</h4>
+					<h4>Sélectionnez les attributs de Image :</h4>
 					<AttributeSelectionStack />
 				</section>
 				<section>
-					<h4>Or define a new attribute:</h4>
-					<button onClick={() => setAddAttributeOpen(true)}>Define new.</button>
+					<h4>Ou définissez un nouvel attribut :</h4>
+					<button onClick={() => setAddAttributeOpen(true)}>définir un nouveau.</button>
 				</section>
 			</article>
 		</ErrorBoundary>

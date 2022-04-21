@@ -19,8 +19,8 @@ export default function Generator() {
 					<meta name='description' content='Generator for the game' />
 				</Helmet>
 				<main className={main}>
-					<h1 className={h1}>Generator</h1>
-					<p className={p}>description for generator</p>
+					<h1 className={h1}>Generateur</h1>
+					<p className={p}>description du generateur</p>
 					{!filesSelected ? <FileSelectionView /> : <AttributeSelectionView />}
 				</main>
 			</ErrorBoundary>

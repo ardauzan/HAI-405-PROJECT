@@ -27,7 +27,7 @@ export default function StringAttributeEditionStack({ setNewStringAttributePossi
 	}, [possibleValuesSelectedForEditing, setNewStringAttributePossibleValues])
 	return (
 		<ErrorBoundary level='stack'>
-			<h4>Possible Values:</h4>
+			<h4>Valeurs possibles :</h4>
 			{newStringAttributePossibleInputs}
 			<button
 				onClick={() => {
@@ -41,7 +41,7 @@ export default function StringAttributeEditionStack({ setNewStringAttributePossi
 					])
 					setNewStringAttributePossibleInputsCount(prev => prev + 1)
 				}}>
-				New Value
+				Nouvelle Valeur
 			</button>
 		</ErrorBoundary>
 	)
