@@ -45,3 +45,9 @@ export const uploadConfigToBackend = selectedConfig => {
 			console.assert(status === 200 && er === undefined, "(uploadConfigToBackend) Successful")
 		})
 }
+
+export const resetBackend = () =>
+	axios
+		.get("api/resetbackend")
+		.then(res => res.status)
+		.catch(() => "500")

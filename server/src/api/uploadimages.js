@@ -15,6 +15,7 @@ uploadimages.use((req, res, next) => {
 	fse.removeSync("public/images", () => {})
 	fse.mkdirSync("public/images")
 	fse.removeSync("public/config.json", () => {})
+	fse.copyFileSync("public/config-uninitialised.json", "public/config.json", 0, () => {})
 	next()
 })
 uploadimages.get("/", (req, res, next) => {

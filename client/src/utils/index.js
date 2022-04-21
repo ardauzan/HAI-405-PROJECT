@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom"
 // ! import api calls
-import { uploadImagesToBackend, uploadConfigToBackend } from "./apiCalls"
+import { uploadImagesToBackend, uploadConfigToBackend, resetBackend } from "./apiCalls"
 // note logic is defined in respective order to levels of execution. First run -> First defined
 // note shared logic is defined in the shared section of the lowest level that depends on it.
 // note shared internal logic that is not exposed to outside modules is defined in the [internal] section of the lowest level that depends on it.
@@ -27,6 +27,14 @@ export const _uploadConfigToBackend = async (fileData, setInternalServerErrorCau
 	return __endpointCall(
 		!(typeof res === "string"),
 		() => _startOver(),
+		() => setInternalServerErrorCaught(true)
+	)
+}
+export const _resetBackend = async setInternalServerErrorCaught => {
+	const res = await resetBackend()
+	return __endpointCall(
+		!(typeof res === "string"),
+		() => <Navigate to='/game' />,
 		() => setInternalServerErrorCaught(true)
 	)
 }
