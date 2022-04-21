@@ -4,8 +4,8 @@ import styles from "./FileSelectorCard.module.sass"
 const { container, heading, content, description } = styles
 export default function FileSelectorCard({ selectedImagesLen, canNotUploadImagesToBackend }) {
 	const [headingTxt, descriptionTxt] = !canNotUploadImagesToBackend
-		? ["Selection Details", `Amount of images chosen: ${selectedImagesLen}`]
-		: ["Invalid selection", "Choose image files to use. (At least 6, at most 24)"]
+		? ["Détails de la sélection", `Nombre des images choisies : ${selectedImagesLen}`]
+		: ["Sélection invalide", "Choisir les images à utiliser (Au moins 6, au maximum 24)"]
 	return (
 		<ErrorBoundary level='card'>
 			<article className={container}>

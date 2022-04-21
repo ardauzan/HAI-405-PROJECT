@@ -15,7 +15,7 @@ export default function FileSelectionView() {
 	return (
 		<ErrorBoundary level='view'>
 			<section className={container}>
-				<h2 className={heading}>File Selection</h2>
+				<h2 className={heading}>Sélection de fichiers</h2>
 				<input type='file' onChange={e => setSelectedImages([...e.target.files])} multiple />
 				<FileSelectorCard
 					selectedImagesLen={selectedImagesLen}
@@ -26,7 +26,7 @@ export default function FileSelectionView() {
 					onClick={() =>
 						_uploadImagesToBackend(selectedImages, setFileData, setInternalServerErrorCaught)
 					}>
-					Upload!
+					Télécharger
 				</button>
 			</section>
 		</ErrorBoundary>

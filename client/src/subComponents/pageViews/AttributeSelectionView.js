@@ -28,7 +28,7 @@ export default function AttributeSelectionView() {
 	}
 	const [nextImageLogic, nextImageText, disabled] =
 		index + 1 < filesCount
-			? [() => setIndex(prev => prev + 1), "Next image!", false]
+			? [() => setIndex(prev => prev + 1), "Image Suivante", false]
 			: [
 					() =>
 						_uploadConfigToBackend(fileData, setInternalServerErrorCaught, () =>
@@ -42,10 +42,10 @@ export default function AttributeSelectionView() {
 	return (
 		<ErrorBoundary level='view'>
 			<section className={container}>
-				<h2 className={heading}>Attribute Selection</h2>
+				<h2 className={heading}>Sélection Des Attributs</h2>
 				<p>Image: {imgNo}</p>
 				<img alt={imgAlt} src={imgSrc} />
-				<h5>Define new attribute:</h5>
+				<h5>Définir un nouvel attribut :</h5>
 				{!addAttributeOpen ? (
 					!editAttributeOpen ? (
 						<AttributeSelectorCard />
@@ -56,7 +56,7 @@ export default function AttributeSelectionView() {
 					<AddAttributeCard />
 				)}
 				<button hidden={definitionOpen} disabled={index <= 0} onClick={() => previousImage(index, setIndex)}>
-					Previous image!
+					Image Précédente
 				</button>
 				<button hidden={definitionOpen} disabled={disabled} onClick={() => nextImageLogic()}>
 					{nextImageText}
@@ -66,7 +66,7 @@ export default function AttributeSelectionView() {
 					onClick={() => {
 						_startOver(setPossibleAttributes, setFileData, setIndex)
 					}}>
-					Start over!
+					Recommencer
 				</button>
 				<button
 					hidden={definitionOpen}

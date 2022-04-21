@@ -19,10 +19,10 @@ export default function AddAttributeCard() {
 	return (
 		<ErrorBoundary level='card'>
 			<article>
-				<h3>Add Attribute</h3>
-				<label htmlFor='atrName'>Attribute name:</label>
+				<h3>Ajouter un attribut</h3>
+				<label htmlFor='atrName'>Nom :</label>
 				<input type='text' id='atrName' onInput={e => setAttr([setNewAttribute, "name"], e)} />
-				<h4>Attribute type:</h4>
+				<h4>Type :</h4>
 				<label htmlFor='atrStr'>String</label>
 				<input
 					type='radio'
@@ -68,7 +68,7 @@ export default function AddAttributeCard() {
 							"add"
 						)
 					}>
-					Finish Defining
+					Finir La Définition
 				</button>
 			</article>
 		</ErrorBoundary>
