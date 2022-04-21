@@ -9,39 +9,39 @@ export default function Footer() {
 					<li className={li}>
 						<ol className={ol2}>
 							<li className={li2}>
-								<p className={p}></p>
+								<p className={p}>example footer text</p>
 							</li>
 							<li className={li2}>
-								<p className={p}></p>
+								<p className={p}>example footer text</p>
 							</li>
 							<li className={li2}>
-								<p className={p}></p>
-							</li>
-						</ol>
-					</li>
-					<li className={li}>
-						<ol className={ol2}>
-							<li className={li2}>
-								<p className={p}></p>
-							</li>
-							<li className={li2}>
-								<p className={p}></p>
-							</li>
-							<li className={li2}>
-								<p className={p}></p>
+								<p className={p}>example footer text</p>
 							</li>
 						</ol>
 					</li>
 					<li className={li}>
 						<ol className={ol2}>
 							<li className={li2}>
-								<p className={p}></p>
+								<p className={p}>asd</p>
 							</li>
 							<li className={li2}>
-								<p className={p}></p>
+								<p className={p}>asd</p>
 							</li>
 							<li className={li2}>
-								<p className={p}></p>
+								<p className={p}>asd</p>
+							</li>
+						</ol>
+					</li>
+					<li className={li}>
+						<ol className={ol2}>
+							<li className={li2}>
+								<p className={p}>asd</p>
+							</li>
+							<li className={li2}>
+								<p className={p}>asd</p>
+							</li>
+							<li className={li2}>
+								<p className={p}>asd</p>
 							</li>
 						</ol>
 					</li>
