@@ -2,9 +2,8 @@
 const express = require("express")
 const fse = require("fs-extra")
 const path = require("path")
-const api = require("./api")
+const { api, port } = require("./api")
 const app = express()
-let port = 5000
 try {
 	if (!fse.existsSync("public/config.json")) throw "config missing"
 } catch {

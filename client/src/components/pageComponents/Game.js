@@ -3,14 +3,14 @@ import { useRecoilValue } from "recoil"
 import { ErrorBoundary } from ".."
 import { internalServerErrorCaughtState } from "../../state"
 import styles from "./Game.module.sass"
-const { container, heading, description } = styles
+const { main, h1, p } = styles
 export default function Game() {
 	const internalServerErrorCaught = useRecoilValue(internalServerErrorCaughtState)
 	return !internalServerErrorCaught ? (
 		<ErrorBoundary level='page'>
-			<main className={container}>
-				<h1 className={heading}>Game</h1>
-				<p className={description}>Game</p>
+			<main className={main}>
+				<h1 className={h1}>Game</h1>
+				<p className={p}>Game</p>
 			</main>
 		</ErrorBoundary>
 	) : (

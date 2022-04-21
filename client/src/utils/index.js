@@ -9,6 +9,7 @@ import { uploadImagesToBackend, uploadConfigToBackend } from "./apiCalls"
 // shared #####################
 export const _renderAsyncContent = (internalServerErrorCaught, content) =>
 	!internalServerErrorCaught ? content : <Navigate to='/500' />
+export const _hostIsLocal = () => location.hostname === "localhost" || location.hostname === "127.0.0.1"
 // level (base) | (View)
 // internal #####################
 const __endpointCall = (status, callback, fallback) => (status ? callback() : fallback())
@@ -29,12 +30,13 @@ export const _uploadConfigToBackend = async (fileData, setInternalServerErrorCau
 		() => setInternalServerErrorCaught(true)
 	)
 }
+// shared #####################
 export const _startOver = (setPossibleAttributes, setFileData, setIndex) => {
 	setPossibleAttributes([])
 	setFileData([])
 	setIndex(0)
 }
-// level (generic) | (card) ##########################################
+// level | (card) ##########################################
 // shared #####################
 export const _canNotFinishDefining = (newAttribute, newStringAttributePossibleValues, possibleAttributes) =>
 	!newAttribute.name ||

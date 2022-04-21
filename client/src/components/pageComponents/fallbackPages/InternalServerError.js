@@ -1,12 +1,12 @@
 import { ErrorBoundary } from "../.."
 import styles from "./InternalServerError.module.sass"
-const { container, heading, description } = styles
+const { main, h1, p } = styles
 export default function InternalServerError() {
 	return (
 		<ErrorBoundary level='fallback'>
-			<main className={container}>
-				<h1 className={heading}>500 | Internal Server Error</h1>
-				<p className={description}>Internal error occured on the backend.</p>
+			<main className={main}>
+				<h1 className={h1}>500 | Internal Server Error</h1>
+				<p className={p}>Internal error occured on the backend.</p>
 			</main>
 		</ErrorBoundary>
 	)

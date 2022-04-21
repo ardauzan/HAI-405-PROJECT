@@ -1,1 +1,19 @@
 @use "../commonStyles/component.sass"
+%navLink
+    color: #f7ede2
+    text-decoration: none
+.nav
+    @extend %container
+.ol
+    display: flex
+    flex-direction: row
+    justify-content: space-evenly
+    min-width: 100vh
+.li
+    list-style-type: none
+.activeNavLink
+    @extend %navLink
+    text-decoration: underline
+
+.passiveNavlink
+    @extend %navLink

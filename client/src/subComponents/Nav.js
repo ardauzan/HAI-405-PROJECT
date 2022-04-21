@@ -1,15 +1,16 @@
 import { NavLink } from "react-router-dom"
 import PropTypes from "prop-types"
-
+import styles from "./Nav.module.sass"
+const { nav, ol, li, activeNavLink, passiveNavlink } = styles
 export default function Nav({ elements }) {
 	return (
-		<nav>
-			<ol>
+		<nav className={nav}>
+			<ol className={ol}>
 				{elements.map((v, i) => (
-					<li key={i}>
+					<li className={li} key={i}>
 						<NavLink
 							to={v[1]}
-							className={({ isActive }) => (isActive ? "activeClassName" : undefined)}>
+							className={({ isActive }) => (isActive ? activeNavLink : passiveNavlink)}>
 							{v[0]}
 						</NavLink>
 					</li>
