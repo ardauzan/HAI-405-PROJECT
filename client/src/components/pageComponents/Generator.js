@@ -6,7 +6,7 @@ import { filesSelectedState, internalServerErrorCaughtState } from "../../state"
 import { _renderAsyncContent, _hostIsLocal } from "../../utils"
 import { AttributeSelectionView, FileSelectionView } from "../../subComponents"
 import styles from "./Generator.module.sass"
-const { main, h1, p } = styles
+const { main } = styles
 export default function Generator() {
 	const internalServerErrorCaught = useRecoilValue(internalServerErrorCaughtState)
 	const filesSelected = useRecoilValue(filesSelectedState)
@@ -18,11 +18,7 @@ export default function Generator() {
 					<title>Generator</title>
 					<meta name='description' content='Generator for the game' />
 				</Helmet>
-				<main className={main}>
-					<h1 className={h1}>Generateur</h1>
-					<p className={p}>description du generateur</p>
-					{!filesSelected ? <FileSelectionView /> : <AttributeSelectionView />}
-				</main>
+				<main className={main}>{!filesSelected ? <FileSelectionView /> : <AttributeSelectionView />}</main>
 			</ErrorBoundary>
 		)
 	) : (

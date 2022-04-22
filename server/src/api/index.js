@@ -1,7 +1,7 @@
 const express = require("express")
 const uploadconfig = require("./uploadconfig")
 const uploadimages = require("./uploadimages")
-const port = 5000
+const port = 4000
 const api = express.Router()
 api.use((req, res, next) => {
 	if (req.headers.host === "localhost:" + port || req.headers.host === "127.0.0.1:" + port) next()

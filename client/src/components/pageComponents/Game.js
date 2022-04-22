@@ -7,7 +7,7 @@ import { internalServerErrorCaughtState, fileDataState } from "../../state"
 import { _renderAsyncContent, _resetBackend } from "../../utils"
 import styles from "./Game.module.sass"
 
-const { main, h1, p } = styles
+const { main, button } = styles
 export default function Game() {
 	const [internalServerErrorCaught, setInternalServerErrorCaught] = useRecoilState(internalServerErrorCaughtState)
 	const [fileData, setFileData] = useRecoilState(fileDataState)
@@ -23,9 +23,9 @@ export default function Game() {
 				<meta name='description' content='The game' />
 			</Helmet>
 			<main className={main}>
-				<h1 className={h1}>Game</h1>
-				<p className={p}>Game</p>
-				<button onClick={() => getFileData()}>press to start</button>
+				<button className={button} onClick={() => getFileData()}>
+					Entrer
+				</button>
 				<button onClick={() => console.log(fileData)}>log</button>
 			</main>
 		</ErrorBoundary>
