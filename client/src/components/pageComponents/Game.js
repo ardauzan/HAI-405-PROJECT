@@ -11,7 +11,7 @@ import { _renderAsyncContent } from "../../utils"
 import { ChoseGameModeView, GameView } from "../../subComponents"
 import styles from "./Game.module.sass"
 
-const { main, h1, p } = styles
+const { main, button } = styles
 export default function Game() {
 	const setFileData = useSetRecoilState(fileDataState)
 	const setPossibleAttributes = useSetRecoilState(possibleAttributesState)
@@ -22,6 +22,7 @@ export default function Game() {
 		false,
 		<ErrorBoundary level='page'>
 			<main className={main}>
+<<<<<<< HEAD
 				<h1 className={h1}>Game</h1>
 				<p className={p}>Game</p>
 				{filesSelected ? (
@@ -37,6 +38,12 @@ export default function Game() {
 				) : (
 					<GameView />
 				)}
+=======
+				<button className={button} onClick={() => getFileData()}>
+					Entrer
+				</button>
+				<button onClick={() => console.log(fileData)}>log</button>
+>>>>>>> 14030a0d35a054b4c90fa3977a2a66355bcd746b
 			</main>
 		</ErrorBoundary>
 	)
