@@ -1,8 +1,9 @@
+import PropTypes from "prop-types"
 import { useSetRecoilState } from "recoil"
 import { ErrorBoundary } from "../../components"
 import { addAttributeOpenState } from "../../state"
 import { AttributeSelectionStack } from ".."
-export default function AttributeSelectorCard() {
+export default function AttributeSelectorCard({ index }) {
 	const setAddAttributeOpen = useSetRecoilState(addAttributeOpenState)
 	return (
 		<ErrorBoundary level='card'>
@@ -10,7 +11,7 @@ export default function AttributeSelectorCard() {
 				<h3>Sélecteur Des Attributs</h3>
 				<section>
 					<h4>Sélectionnez les attributs de Image :</h4>
-					<AttributeSelectionStack />
+					<AttributeSelectionStack index={index} />
 				</section>
 				<section>
 					<h4>Ou définissez un nouvel attribut :</h4>
@@ -19,4 +20,7 @@ export default function AttributeSelectorCard() {
 			</article>
 		</ErrorBoundary>
 	)
+}
+AttributeSelectorCard.propTypes = {
+	index: PropTypes.number.isRequired
 }

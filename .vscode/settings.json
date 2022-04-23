@@ -20,7 +20,6 @@
 	"prettier.useEditorConfig": false,
 	"prettier.withNodeModules": true,
 	"eslint.alwaysShowStatus": true,
-	"eslint.codeAction.showDocumentation": {},
 	"eslint.codeActionsOnSave.mode": "all",
 	"eslint.format.enable": false,
 	"eslint.useESLintClass": true,
@@ -38,8 +37,6 @@
 	"errorLens.delay": 650,
 	"errorLens.enableOnDiffView": true,
 	"errorLens.statusBarMessageType": "closestSeverity",
-	"better-comments.highlightPlainText": true,
-	"better-comments.multilineComments": true,
 	"shellcheck.run": "onSave",
 	"shellcheck.useWorkspaceRootAsCwd": true,
 	"[shellscript]": {
@@ -48,70 +45,5 @@
 	"bashBeautify.tabSize": 6,
 	"githubRepositories.logLevel": "info",
 	"remoteHub.experimental.useSimplifiedMerge": true,
-	"remoteHub.richNavigation.enabled": true,
-	"better-comments.tags": [
-		{
-			"tag": "!",
-			"color": "#FF2D00",
-			"strikethrough": false,
-			"underline": false,
-			"backgroundColor": "transparent",
-			"bold": false,
-			"italic": false
-		},
-		{
-			"tag": "note",
-			"color": "#FF8C00",
-			"strikethrough": false,
-			"underline": false,
-			"backgroundColor": "transparent",
-			"bold": false,
-			"italic": false
-		},
-		{
-			"tag": "shared",
-			"color": "#a503fc",
-			"strikethrough": false,
-			"underline": false,
-			"backgroundColor": "transparent",
-			"bold": false,
-			"italic": false
-		},
-		{
-			"tag": "level",
-			"color": "#7fa818",
-			"strikethrough": false,
-			"underline": false,
-			"backgroundColor": "transparent",
-			"bold": false,
-			"italic": false
-		},
-		{
-			"tag": "internal",
-			"color": "#8af7b9",
-			"strikethrough": false,
-			"underline": false,
-			"backgroundColor": "transparent",
-			"bold": false,
-			"italic": false
-		},
-		{
-			"tag": "external",
-			"color": "#FC4103",
-			"strikethrough": false,
-			"underline": false,
-			"backgroundColor": "transparent",
-			"bold": false,
-			"italic": false
-		},
-		{
-			"tag": "info",
-			"color": "#98C379",
-			"strikethrough": false,
-			"underline": false,
-			"backgroundColor": "transparent",
-			"bold": false,
-			"italic": false
-		}
-	]
+	"remoteHub.richNavigation.enabled": true
 }

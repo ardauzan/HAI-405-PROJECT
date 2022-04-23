@@ -2,7 +2,6 @@
 	"name": "server",
 	"version": "1.0.0",
 	"description": "Backend",
-	"author": "Arda Uzan <arda.uzan@protonmail.com> (https://github.com/ardauzan)",
 	"private": true,
 	"license": "UNLICENSED",
 	"scripts": {

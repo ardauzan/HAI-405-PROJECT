@@ -16,7 +16,7 @@ export default function FileSelectionView() {
 		<ErrorBoundary level='view'>
 			<section className={container}>
 				<h2 className={heading}>Sélection de fichiers</h2>
-				<input type='file' onChange={e => setSelectedImages([...e.target.files])} multiple />
+				<input type='file' accept='.png' onChange={e => setSelectedImages([...e.target.files])} multiple />
 				<FileSelectorCard
 					selectedImagesLen={selectedImagesLen}
 					canNotUploadImagesToBackend={canNotUploadImagesToBackend}

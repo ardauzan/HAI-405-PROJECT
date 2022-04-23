@@ -1,19 +1,29 @@
+/* eslint-disable no-console */
 import { Navigate } from "react-router-dom"
-// ! import api calls
+import axios from "axios"
 import { uploadImagesToBackend, uploadConfigToBackend, resetBackend } from "./apiCalls"
-// note logic is defined in respective order to levels of execution. First run -> First defined
-// note shared logic is defined in the shared section of the lowest level that depends on it.
-// note shared internal logic that is not exposed to outside modules is defined in the [internal] section of the lowest level that depends on it.
-// note shared external logic that is exposed to outside modules is defined in the [external] section of the lowest level that depends on it.
-//level (fallback) | (Page) ##########################################
-// shared #####################
 export const _renderAsyncContent = (internalServerErrorCaught, content) =>
 	!internalServerErrorCaught ? content : <Navigate to='/500' />
 export const _hostIsLocal = () => location.hostname === "localhost" || location.hostname === "127.0.0.1"
-// level (base) | (View)
-// internal #####################
+export const _buildAllPossibleChoicesArray = gameData => {
+	let tmpObj = {}
+	for (let i = 0; i < gameData.length; i++)
+		for (let e in gameData[i])
+			switch (typeof gameData[i][e]) {
+				case "string":
+					if (!tmpObj[e]) tmpObj[e] = { type: "string", possibilities: [] }
+					if (!tmpObj[e].possibilities.includes(gameData[i][e]))
+						tmpObj[e].possibilities.push(gameData[i][e])
+					break
+				case "boolean":
+					if (!tmpObj[e]) tmpObj[e] = { type: "boolean" }
+					break
+				case "number":
+					if (!tmpObj[e]) tmpObj[e] = { type: "number" }
+			}
+	return tmpObj
+}
 const __endpointCall = (status, callback, fallback) => (status ? callback() : fallback())
-// external #####################
 export const _uploadImagesToBackend = async (selectedImages, setFileData, setInternalServerErrorCaught) => {
 	const res = await uploadImagesToBackend(selectedImages)
 	return __endpointCall(
@@ -30,22 +40,22 @@ export const _uploadConfigToBackend = async (fileData, setInternalServerErrorCau
 		() => setInternalServerErrorCaught(true)
 	)
 }
-export const _resetBackend = async setInternalServerErrorCaught => {
+export const _resetBackend = async (setInternalServerErrorCaught, setFileData) => {
 	const res = await resetBackend()
 	return __endpointCall(
 		!(typeof res === "string"),
-		() => <Navigate to='/game' />,
+		async () => {
+			const data = await axios.get("config.json").then(res => res.data)
+			setFileData(data)
+		},
 		() => setInternalServerErrorCaught(true)
 	)
 }
-// shared #####################
 export const _startOver = (setPossibleAttributes, setFileData, setIndex) => {
 	setPossibleAttributes([])
 	setFileData([])
 	setIndex(0)
 }
-// level | (card) ##########################################
-// shared #####################
 export const _canNotFinishDefining = (newAttribute, newStringAttributePossibleValues, possibleAttributes) =>
 	!newAttribute.name ||
 	!/^[A-Za-z]+$/.test(newAttribute.name) ||
@@ -57,19 +67,14 @@ export const _canNotFinishDefining = (newAttribute, newStringAttributePossibleVa
 		return tmpSet.size < tmpArr.length
 	})() ||
 	(() => {
-		for (let i = 0; i < possibleAttributes.length; i++) {
-			if (possibleAttributes[i].name === newAttribute.name) {
-				return true
-			}
-		}
+		for (let i = 0; i < possibleAttributes.length; i++)
+			if (possibleAttributes[i].name === newAttribute.name) return true
 		return false
 	})() ||
 	(() => {
 		const tmpArr = Object.values(newStringAttributePossibleValues).filter(i => i !== "")
 		for (let i = 0; i < tmpArr.length; i++) {
-			if (tmpArr[i] === newAttribute.name) {
-				return true
-			}
+			if (tmpArr[i] === newAttribute.name) return true
 		}
 		return false
 	})()
@@ -93,8 +98,12 @@ export const _finishDefining = (
 					  }
 					: newAttribute)()
 		]
-	})
-	type === "add" ? setDefineAttributeOpen(false) : setDefineAttributeOpen([false, "", []])
+	})(type === "add")
+		? setDefineAttributeOpen(false)
+		: setDefineAttributeOpen([false, "", []])
 }
-// level (grid) | (stack)
-// level (cell) | (frame)
+
+export const _parseAllQuestions = (v, allQuestions) => {
+	console.log(v, allQuestions)
+	return true
+}

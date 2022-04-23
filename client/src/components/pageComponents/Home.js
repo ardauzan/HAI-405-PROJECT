@@ -1,21 +1,11 @@
-import { Helmet } from "react-helmet"
 import { ErrorBoundary } from ".."
 import styles from "./Home.module.sass"
 const { container } = styles
 export default function Home() {
 	return (
 		<ErrorBoundary level='page'>
-			<Helmet>
-				<title>Who am I?</title>
-				<meta name='description' content='Information about the game' />
-			</Helmet>
 			<main className={container}>
 				<h1> WHO AM I - Les règles du jeu :</h1>
-				<link rel='preconnect' href='https://fonts.googleapis.com'></link>
-				<link rel='preconnect' href='https://fonts.gstatic.com'></link>
-				<link
-					href='https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap'
-					rel='stylesheet'></link>
 				<ul>
 					<li>Lun des joueurs est désigné ou tiré au sort pour être celui qui commence le jeu.</li>
 					<li>

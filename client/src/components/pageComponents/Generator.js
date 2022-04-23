@@ -1,27 +1,35 @@
-import { useRecoilValue } from "recoil"
+import { useSetRecoilState, useRecoilValue } from "recoil"
 import { Navigate } from "react-router-dom"
-import { Helmet } from "react-helmet"
 import { ErrorBoundary } from ".."
-import { filesSelectedState, internalServerErrorCaughtState } from "../../state"
+import { internalServerErrorCaughtState, filesSelectedState, gameState, gameInSessionState } from "../../state"
 import { _renderAsyncContent, _hostIsLocal } from "../../utils"
 import { AttributeSelectionView, FileSelectionView } from "../../subComponents"
 import styles from "./Generator.module.sass"
 const { main, h1, p } = styles
 export default function Generator() {
+	const setGame = useSetRecoilState(gameState)
 	const internalServerErrorCaught = useRecoilValue(internalServerErrorCaughtState)
+	const gameInSession = useRecoilValue(gameInSessionState)
 	const filesSelected = useRecoilValue(filesSelectedState)
 	return _hostIsLocal() ? (
 		_renderAsyncContent(
 			internalServerErrorCaught,
 			<ErrorBoundary level='page'>
-				<Helmet>
-					<title>Generator</title>
-					<meta name='description' content='Generator for the game' />
-				</Helmet>
 				<main className={main}>
 					<h1 className={h1}>Generateur</h1>
 					<p className={p}>description du generateur</p>
-					{!filesSelected ? <FileSelectionView /> : <AttributeSelectionView />}
+					{gameInSession ? (
+						<button
+							onClick={() => {
+								setGame(prev => [false, prev[1], null])
+							}}>
+							Stop The game and interact with the generator
+						</button>
+					) : !filesSelected ? (
+						<FileSelectionView />
+					) : (
+						<AttributeSelectionView />
+					)}
 				</main>
 			</ErrorBoundary>
 		)

@@ -1,15 +1,16 @@
+import PropTypes from "prop-types"
 import { useRecoilState } from "recoil"
 import { ErrorBoundary } from "../../components"
 import { fileDataState, possibleAttributesState } from "../../state"
 import { AttributeSelectionFrame } from ".."
-export default function AttributeSelectionStack() {
+export default function AttributeSelectionStack({ index }) {
 	const [fileData, setFileData] = useRecoilState(fileDataState)
 	const [possibleAttributes, setPossibleAttributes] = useRecoilState(possibleAttributesState)
 	return (
 		<ErrorBoundary level='stack'>
 			{possibleAttributes.map((v, i) => (
 				<article key={i}>
-					<AttributeSelectionFrame v={v} i={i} />
+					<AttributeSelectionFrame index={index} v={v} i={i} />
 					<button
 						onClick={() => {
 							let tmpArr = []
@@ -37,4 +38,7 @@ export default function AttributeSelectionStack() {
 			))}
 		</ErrorBoundary>
 	)
+}
+AttributeSelectionStack.propTypes = {
+	index: PropTypes.number.isRequired
 }

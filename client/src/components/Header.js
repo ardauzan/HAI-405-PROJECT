@@ -1,6 +1,6 @@
-import { ErrorBoundary } from ".."
-import { Nav } from "../../subComponents"
-import { _hostIsLocal } from "../../utils"
+import { ErrorBoundary, DebugButton } from "."
+import { Nav } from "../subComponents"
+import { _hostIsLocal } from "../utils"
 import styles from "./Header.module.sass"
 const { header, img } = styles
 export default function Header() {
@@ -19,6 +19,7 @@ export default function Header() {
 			<header className={header}>
 				<img className={img} alt='logo' src='logo.png' />
 				<Nav elements={elements} />
+				{_hostIsLocal() ? <DebugButton /> : null}
 			</header>
 		</ErrorBoundary>
 	)

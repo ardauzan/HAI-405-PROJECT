@@ -1,10 +1,10 @@
+import { useState } from "react"
 import { useRecoilState, useSetRecoilState, useRecoilValue } from "recoil"
 import {
 	fileDataState,
 	filesCountState,
 	addAttributeOpenState,
 	editAttributeOpenState,
-	indexState,
 	possibleAttributesState,
 	internalServerErrorCaughtState
 } from "../../state"
@@ -15,7 +15,7 @@ import styles from "./AttributeSelectionView.module.sass"
 const { container, heading } = styles
 export default function AttributeSelectionView() {
 	const [fileData, setFileData] = useRecoilState(fileDataState)
-	const [index, setIndex] = useRecoilState(indexState)
+	const [index, setIndex] = useState(0)
 	const setPossibleAttributes = useSetRecoilState(possibleAttributesState)
 	const setInternalServerErrorCaught = useSetRecoilState(internalServerErrorCaughtState)
 	const filesCount = useRecoilValue(filesCountState)
@@ -39,6 +39,22 @@ export default function AttributeSelectionView() {
 			  ]
 	const definitionOpen = addAttributeOpen || editAttributeOpen
 	const previousImage = (index, setIndex) => (index > 0 ? setIndex(prev => prev - 1) : null)
+	const buttons = [
+		<button key='b1' hidden={definitionOpen} disabled={index <= 0} onClick={() => previousImage(index, setIndex)}>
+			Image Précédente
+		</button>,
+		<button key='b2' hidden={definitionOpen} disabled={disabled} onClick={() => nextImageLogic()}>
+			{nextImageText}
+		</button>,
+		<button
+			key='b3'
+			hidden={definitionOpen}
+			onClick={() => {
+				_startOver(setPossibleAttributes, setFileData, setIndex)
+			}}>
+			Recommencer
+		</button>
+	]
 	return (
 		<ErrorBoundary level='view'>
 			<section className={container}>
@@ -48,33 +64,14 @@ export default function AttributeSelectionView() {
 				<h5>Définir un nouvel attribut :</h5>
 				{!addAttributeOpen ? (
 					!editAttributeOpen ? (
-						<AttributeSelectorCard />
+						<AttributeSelectorCard index={index} />
 					) : (
 						<EditAttributeCard />
 					)
 				) : (
 					<AddAttributeCard />
 				)}
-				<button hidden={definitionOpen} disabled={index <= 0} onClick={() => previousImage(index, setIndex)}>
-					Image Précédente
-				</button>
-				<button hidden={definitionOpen} disabled={disabled} onClick={() => nextImageLogic()}>
-					{nextImageText}
-				</button>
-				<button
-					hidden={definitionOpen}
-					onClick={() => {
-						_startOver(setPossibleAttributes, setFileData, setIndex)
-					}}>
-					Recommencer
-				</button>
-				<button
-					hidden={definitionOpen}
-					onClick={() => {
-						console.log(fileData) /* eslint-disable-line no-console */
-					}}>
-					Log fileData
-				</button>
+				{buttons}
 			</section>
 		</ErrorBoundary>
 	)

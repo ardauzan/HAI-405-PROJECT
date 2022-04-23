@@ -1,32 +1,42 @@
-/* eslint-disable no-console */
-import { useRecoilState } from "recoil"
-import { Helmet } from "react-helmet"
+import { useSetRecoilState, useRecoilValue } from "recoil"
 import { ErrorBoundary } from ".."
-import axios from "axios"
-import { internalServerErrorCaughtState, fileDataState } from "../../state"
-import { _renderAsyncContent, _resetBackend } from "../../utils"
+import {
+	fileDataState,
+	possibleAttributesState,
+	//	internalServerErrorCaughtState,
+	filesSelectedState,
+	gameInSessionState
+} from "../../state"
+import { _renderAsyncContent } from "../../utils"
+import { ChoseGameModeView, GameView } from "../../subComponents"
 import styles from "./Game.module.sass"
 
 const { main, h1, p } = styles
 export default function Game() {
-	const [internalServerErrorCaught, setInternalServerErrorCaught] = useRecoilState(internalServerErrorCaughtState)
-	const [fileData, setFileData] = useRecoilState(fileDataState)
-	const getFileData = async () => {
-		const data = await axios.get("config.json").then(res => res.data)
-		return data === {} ? _resetBackend(setInternalServerErrorCaught) : setFileData(data)
-	}
+	const setFileData = useSetRecoilState(fileDataState)
+	const setPossibleAttributes = useSetRecoilState(possibleAttributesState)
+	//	const internalServerErrorCaught = useRecoilValue(internalServerErrorCaughtState)
+	const filesSelected = useRecoilValue(filesSelectedState)
+	const gameInSession = useRecoilValue(gameInSessionState)
 	return _renderAsyncContent(
-		internalServerErrorCaught,
+		false,
 		<ErrorBoundary level='page'>
-			<Helmet>
-				<title>Game</title>
-				<meta name='description' content='The game' />
-			</Helmet>
 			<main className={main}>
 				<h1 className={h1}>Game</h1>
 				<p className={p}>Game</p>
-				<button onClick={() => getFileData()}>press to start</button>
-				<button onClick={() => console.log(fileData)}>log</button>
+				{filesSelected ? (
+					<button
+						onClick={() => {
+							setFileData([])
+							setPossibleAttributes([])
+						}}>
+						Reset The backend and interact with the game
+					</button>
+				) : !gameInSession ? (
+					<ChoseGameModeView />
+				) : (
+					<GameView />
+				)}
 			</main>
 		</ErrorBoundary>
 	)

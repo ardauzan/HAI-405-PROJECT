@@ -1,12 +1,11 @@
 import PropTypes from "prop-types"
-import { useRecoilState, useSetRecoilState, useRecoilValue } from "recoil"
+import { useRecoilState, useSetRecoilState } from "recoil"
 import { ErrorBoundary } from "../../components"
-import { fileDataState, editAttributeState, indexState, possibleAttributesState } from "../../state"
-export default function AttributeSelectionChoiceFrame({ v, i }) {
+import { fileDataState, editAttributeState, possibleAttributesState } from "../../state"
+export default function AttributeSelectionFrame({ index, v, i }) {
 	const [fileData, setFileData] = useRecoilState(fileDataState)
 	const [possibleAttributes, setPossibleAttributes] = useRecoilState(possibleAttributesState)
 	const setEditAttribute = useSetRecoilState(editAttributeState)
-	const index = useRecoilValue(indexState)
 	const _replaceObjectElementInArrayAtIndex = (l, index, newE) => {
 		let tmpArr = []
 		for (let i = 0; i < l.length; i++) {
@@ -169,7 +168,8 @@ export default function AttributeSelectionChoiceFrame({ v, i }) {
 		</ErrorBoundary>
 	)
 }
-AttributeSelectionChoiceFrame.propTypes = {
+AttributeSelectionFrame.propTypes = {
+	index: PropTypes.number.isRequired,
 	v: PropTypes.exact({
 		name: PropTypes.string.isRequired,
 		type: PropTypes.string.isRequired,
