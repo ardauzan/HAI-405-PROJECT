@@ -98,9 +98,9 @@ export const _finishDefining = (
 					  }
 					: newAttribute)()
 		]
-	})(type === "add")
-		? setDefineAttributeOpen(false)
-		: setDefineAttributeOpen([false, "", []])
+	})
+	if (type === "add") setDefineAttributeOpen(false)
+	else setDefineAttributeOpen([false, "", []])
 }
 
 export const _parseQuestions = (v, questions) => {
