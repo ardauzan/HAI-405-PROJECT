@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useRecoilValue } from "recoil"
 import { gameDataState } from "../state"
 import { ErrorBoundary } from "../components"
@@ -9,9 +10,9 @@ export default function CardGrid() {
 	return (
 		<ErrorBoundary level='grid'>
 			<article className={container}>
-				{gameData.map((v, i) => (
-					<GridCell vi={[v, i]} key={i} />
-				))}
+				{gameData.map((v, i) => {
+					return <GridCell vi={[v, i]} key={"xcv" + i} />
+				})}
 			</article>
 		</ErrorBoundary>
 	)

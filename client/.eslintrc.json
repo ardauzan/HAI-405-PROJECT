@@ -23,6 +23,7 @@
 		"react-hooks/exhaustive-deps": [
 			"error",
 			{ "additionalHooks": "(useRecoilCallback|useRecoilTransaction_UNSTABLE)" }
-		]
+		],
+		"no-inline-comments": "error"
 	}
 }

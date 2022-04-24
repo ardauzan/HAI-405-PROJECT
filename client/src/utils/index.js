@@ -103,7 +103,32 @@ export const _finishDefining = (
 		: setDefineAttributeOpen([false, "", []])
 }
 
-export const _parseAllQuestions = (v, allQuestions) => {
-	console.log(v, allQuestions)
-	return true
+export const _parseQuestions = (v, questions) => {
+	const first = questions[0]
+	console.log(questions)
+	const transpileQuestion = (question, isFirstQuestion) =>
+		isFirstQuestion
+			? (() => v[question[1]] === question[2])()
+			: previousQuestion =>
+					question[0] === "and"
+						? previousQuestion && v[question[1]] === question[2]
+						: previousQuestion || v[question[1]] === question[2]
+	const aux = (questions, acc) =>
+		!questions.length
+			? acc
+			: aux(questions.slice(1), [...acc, transpileQuestion(questions[0], questions[0] === first)])
+	const combineAllQuestionsLogic = trasnspiledQuestions => {
+		console.log(trasnspiledQuestions)
+		const aux = (trasnspiledQuestions, acc) =>
+			!trasnspiledQuestions.length === 0
+				? acc
+				: aux(
+						trasnspiledQuestions.slice(1),
+						typeof acc === "boolean"
+							? console.log(trasnspiledQuestions, trasnspiledQuestions[1](acc))
+							: trasnspiledQuestions[0](acc)
+				  )
+		return aux(trasnspiledQuestions, trasnspiledQuestions[0])
+	}
+	return combineAllQuestionsLogic(aux(questions, []))
 }

@@ -6,11 +6,9 @@ import { useRecoilValue } from "recoil"
 import { _parseAllQuestions } from "../utils"
 import eliminated from "../cross.png"
 import styles from "./GridCell.module.sass"
-
+import { _parseQuestions } from "../utils"
 const { cross, defimg, container, testgrid } = styles
-
-export default function GridCell({ vi }) {
-	const [v, i] = vi
+export default function GridCell({ vi: [v, i] }) {
 	const [imgAlt, imgSrc] = ["image-" + (i + 1), "images/image-" + (i + 1) + ".png"]
 	const allQuestions = useRecoilValue(allQuestionsState)
 	return (
@@ -27,6 +25,12 @@ export default function GridCell({ vi }) {
 					</div>
 				</div>
 			</article>
+			<button
+				onClick={() => {
+					console.log(allQuestions, _parseQuestions(v, allQuestions))
+				}}>
+				log_parseQuestions
+			</button>
 		</ErrorBoundary>
 	)
 }

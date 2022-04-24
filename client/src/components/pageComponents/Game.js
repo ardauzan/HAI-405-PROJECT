@@ -10,7 +10,6 @@ import {
 import { _renderAsyncContent } from "../../utils"
 import { ChoseGameModeView, GameView } from "../../subComponents"
 import styles from "./Game.module.sass"
-
 const { main } = styles
 export default function Game() {
 	const setFileData = useSetRecoilState(fileDataState)
