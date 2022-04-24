@@ -14,7 +14,7 @@ export default function SinglePlayerGameView() {
 		<ErrorBoundary level='view'>
 			<section className={container}>
 				<h2>{heading}</h2>
-				<h3>turn:{allQuestions.length}</h3>
+				<h3>Tour:{allQuestions.length}</h3>
 				<GameGridCard />
 				<GameChoiceCard />
 				<button

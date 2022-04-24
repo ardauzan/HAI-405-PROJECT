@@ -17,5 +17,5 @@ body {
 #root {
 	display: flex;
 	flex-direction: column;
-	background-color: #090909;
+	background-color: black;
 }

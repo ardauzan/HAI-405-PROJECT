@@ -22,8 +22,6 @@ export default function Game() {
 		false,
 		<ErrorBoundary level='page'>
 			<main className={main}>
-				<h1>Game</h1>
-				<p>Game</p>
 				{filesSelected ? (
 					<button
 						onClick={() => {

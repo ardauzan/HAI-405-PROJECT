@@ -5,6 +5,9 @@ import { allQuestionsState } from "../state"
 import { useRecoilValue } from "recoil"
 import { _parseAllQuestions } from "../utils"
 import eliminated from "../cross.svg"
+import styles from "./GridCell.module.sass"
+
+const { cross, defimg, grid } = styles
 
 export default function GridCell({ vi }) {
 	const [v, i] = vi
@@ -12,9 +15,11 @@ export default function GridCell({ vi }) {
 	const allQuestions = useRecoilValue(allQuestionsState)
 	return (
 		<ErrorBoundary level='cell'>
-			<article>
-				{_parseAllQuestions(v, allQuestions) ? <img alt='eliminated' src={eliminated} /> : null}
-				<img alt={imgAlt} src={imgSrc} />
+			<article className={grid}>
+				{_parseAllQuestions(v, allQuestions) ? (
+					<img className={cross} alt='eliminated' src={eliminated} />
+				) : null}
+				<img className={defimg} alt={imgAlt} src={imgSrc} />
 			</article>
 		</ErrorBoundary>
 	)
