@@ -11,7 +11,6 @@ export default function GameChoiceCard() {
 	const [currentQuestion, setCurrentQuestion] = useRecoilState(currentQuestionState)
 	const canNotValidate = () => {
 		for (let i = 0; i < currentQuestion.length; i++) {
-			console.log(currentQuestion[i])
 			if (
 				i === 0
 					? !currentQuestion[i][1] ||
@@ -36,7 +35,19 @@ export default function GameChoiceCard() {
 					}}>
 					valider
 				</button>
-				<button onClick={() => console.log(allQuestions, currentQuestion, canNotValidate())}>log</button>
+				<button
+					onClick={() =>
+						console.log(
+							"allQuestions",
+							allQuestions,
+							"currentQuestion",
+							currentQuestion,
+							"canNotValidate",
+							canNotValidate()
+						)
+					}>
+					logall
+				</button>
 			</article>
 		</ErrorBoundary>
 	)
