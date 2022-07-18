@@ -104,13 +104,10 @@ export const _finishDefining = (
 }
 
 export const _parseQuestions = (v, questions) => {
-	console.log("v:", v)
 	const first = questions[0]
 	const transpileQuestion = (question, isFirstQuestion) => {
-		console.log("question t", typeof question[0], "question[0][2]:", question[0][2])
 		isFirstQuestion
 			? (() => {
-					console.log("v", v, "question", question[0], v[question[0][1]], v[question[0][1]])
 					return v[question[0][1]] === question[0][2]
 			  })()
 			: previousQuestion =>
@@ -119,24 +116,21 @@ export const _parseQuestions = (v, questions) => {
 						: previousQuestion || v[question[0][1]] === question[0][2]
 	}
 	const aux = (questions, acc) => {
-		console.log("questions:", questions, "first", first)
-		return !questions.length
+		return questions.length === 0
 			? acc
 			: aux(questions.slice(1), [...acc, transpileQuestion(questions[0], questions[0] === first)])
 	}
 	const combineAllQuestionsLogic = trasnspiledQuestions => {
-		console.log("trasnspiledQuestions:", trasnspiledQuestions)
-		const aux = (trasnspiledQuestions, acc) =>
-			!trasnspiledQuestions.length === 0
+		const aux = (trasnspiledQuestions, acc) => {
+			console.log(trasnspiledQuestions)
+			return trasnspiledQuestions.length === 0
 				? acc
 				: aux(
 						trasnspiledQuestions.slice(1),
-						typeof acc === "boolean"
-							? console.log(trasnspiledQuestions, trasnspiledQuestions[1](acc))
-							: trasnspiledQuestions[0](acc)
+						typeof acc === "boolean" ? trasnspiledQuestions[1](acc) : trasnspiledQuestions[0](acc)
 				  )
+		}
 		return aux(trasnspiledQuestions, trasnspiledQuestions[0])
 	}
-	console.log("aux(questions, [])", aux(questions, []))
 	return combineAllQuestionsLogic(aux(questions, []))
 }

@@ -25,8 +25,7 @@ export default function GridCell({ vi: [v, i] }) {
 			</article>
 			<button
 				onClick={() => {
-					console.log("allQuestions", allQuestions)
-					console.log(allQuestions, _parseQuestions(v, allQuestions))
+					console.log(_parseQuestions(v, allQuestions))
 				}}>
 				log_parseQuestions
 			</button>

@@ -1,12 +1,13 @@
+/*eslint-disable no-console */
 import axios from "axios"
-import { useRecoilState, useSetRecoilState, useRecoilValue } from "recoil"
+import { useSetRecoilState, useRecoilValue } from "recoil"
 import { ErrorBoundary } from "../../components"
 import { internalServerErrorCaughtState, gameDataState, gameState, gameModeState } from "../../state"
 import { _resetBackend } from "../../utils"
 import styles from "./ChoseGameModeView.module.sass"
 const { container, radiotoolbar, radio, startbtn, div2, radiolabel } = styles
 export default function ChoseGameModeView() {
-	const [gameData, setGameData] = useRecoilState(gameDataState)
+	const setGameData = useSetRecoilState(gameDataState)
 	const setGame = useSetRecoilState(gameState)
 	const gameMode = useRecoilValue(gameModeState)
 	const setInternalServerErrorCaught = useSetRecoilState(internalServerErrorCaughtState)
@@ -15,11 +16,16 @@ export default function ChoseGameModeView() {
 			.get("config.json")
 			.then(res => res.data)
 			.catch(() => setInternalServerErrorCaught(true))
-		return data.length === 0 ? _resetBackend(setInternalServerErrorCaught, setGameData) : setGameData(data)
+		if (!data.length) {
+			_resetBackend(setInternalServerErrorCaught, setGameData)
+		} else {
+			setGameData(data)
+			setGame(prev => [true, prev[1], Math.floor(Math.random() * data.length)])
+		}
 	}
 	const startGame = () => {
 		getGameDataFromBackend()
-		setGame(prev => [true, prev[1], Math.floor(Math.random() * gameData.length)])
+		setGame(prev => [true, prev[1], prev[2]])
 	}
 	return (
 		<ErrorBoundary level='view'>
@@ -34,7 +40,7 @@ export default function ChoseGameModeView() {
 							type='radio'
 							id='gme-0'
 							checked={gameMode === 0}
-							onChange={() => setGame(prev => [prev[0], 0, prev[2]])}
+							onChange={() => setGame(prev => [false, 0, prev[2]])}
 						/>
 					</div>
 
@@ -47,12 +53,12 @@ export default function ChoseGameModeView() {
 							type='radio'
 							id='gme-1'
 							checked={gameMode === 1}
-							onChange={() => setGame(prev => [prev[0], 1, prev[2]])}
+							onChange={() => setGame(prev => [false, 1, prev[2]])}
 						/>
 					</div>
 				</div>
 				<div className={div2}>
-					<button className={startbtn} onClick={() => startGame()}>
+					<button className={startbtn} onClick={startGame}>
 						Start game
 					</button>
 				</div>
