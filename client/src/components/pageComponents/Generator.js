@@ -21,7 +21,7 @@ export default function Generator() {
 					{gameInSession ? (
 						<button
 							onClick={() => {
-								setGame(prev => [false, prev[1], null])
+								setGame(prev => [false, prev[1], null, prev[3]])
 							}}>
 							Stop The game and interact with the generator
 						</button>

@@ -20,12 +20,12 @@ export default function ChoseGameModeView() {
 			_resetBackend(setInternalServerErrorCaught, setGameData)
 		} else {
 			setGameData(data)
-			setGame(prev => [true, prev[1], Math.floor(Math.random() * data.length)])
+			setGame(prev => [true, prev[1], Math.floor(Math.random() * data.length), prev[3]])
 		}
 	}
 	const startGame = () => {
 		getGameDataFromBackend()
-		setGame(prev => [true, prev[1], prev[2]])
+		setGame(prev => [true, prev[1], prev[2], prev[3]])
 	}
 	return (
 		<ErrorBoundary level='view'>
@@ -40,7 +40,7 @@ export default function ChoseGameModeView() {
 							type='radio'
 							id='gme-0'
 							checked={gameMode === 0}
-							onChange={() => setGame(prev => [false, 0, prev[2]])}
+							onChange={() => setGame(prev => [false, 0, prev[2], prev[3]])}
 						/>
 					</div>
 
@@ -53,7 +53,7 @@ export default function ChoseGameModeView() {
 							type='radio'
 							id='gme-1'
 							checked={gameMode === 1}
-							onChange={() => setGame(prev => [false, 1, prev[2]])}
+							onChange={() => setGame(prev => [false, 1, prev[2], prev[3]])}
 						/>
 					</div>
 				</div>

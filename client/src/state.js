@@ -9,7 +9,7 @@ export const gameDataState = atom({
 })
 export const gameState = atom({
 	key: "gameState",
-	default: [false, 0, null]
+	default: [false, 0, null, 0]
 })
 export const allQuestionsState = atom({
 	key: "allQuestionsState",

@@ -2,13 +2,14 @@
 //import PropTypes from "prop-types"
 import { ErrorBoundary } from "../../components"
 import { useRecoilState } from "recoil"
-import { currentQuestionState, allQuestionsState } from "../../state"
+import { gameState, currentQuestionState, allQuestionsState } from "../../state"
 import { GameChoiceStack } from ".."
 import styles from "./GameChoiceCard.module.sass"
 const { container } = styles
 export default function GameChoiceCard() {
 	const [allQuestions, setAllQuestions] = useRecoilState(allQuestionsState)
 	const [currentQuestion, setCurrentQuestion] = useRecoilState(currentQuestionState)
+	const [game, setGame] = useRecoilState(gameState)
 	const canNotValidate = () => {
 		for (let i = 0; i < currentQuestion.length; i++) {
 			if (
@@ -30,7 +31,12 @@ export default function GameChoiceCard() {
 				<button
 					disabled={canNotValidate()}
 					onClick={() => {
-						setAllQuestions(prev => [...prev, currentQuestion])
+						let tmpArr = currentQuestion
+						if (game[3]) {
+							tmpArr[0][0] = "and"
+						}
+						setAllQuestions(prev => [...prev, ...tmpArr])
+						setGame(prev => [prev[0], prev[1], prev[2], prev[3] + 1])
 						setCurrentQuestion([])
 					}}>
 					valider

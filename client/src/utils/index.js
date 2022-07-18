@@ -104,33 +104,29 @@ export const _finishDefining = (
 }
 
 export const _parseQuestions = (v, questions) => {
+	if (questions.length === 0) return false
 	const first = questions[0]
-	const transpileQuestion = (question, isFirstQuestion) => {
+	const transpileQuestion = (question, isFirstQuestion) =>
 		isFirstQuestion
-			? (() => {
-					return v[question[0][1]] === question[0][2]
-			  })()
+			? () => v[question[1]] === question[2]
 			: previousQuestion =>
 					question[0][0] === "and"
-						? previousQuestion && v[question[0][1]] === question[0][2]
-						: previousQuestion || v[question[0][1]] === question[0][2]
-	}
-	const aux = (questions, acc) => {
-		return questions.length === 0
+						? previousQuestion && v[question[1]] === question[2]
+						: previousQuestion || v[question[1]] === question[2]
+
+	const aux = (questions, acc) =>
+		!questions.length
 			? acc
 			: aux(questions.slice(1), [...acc, transpileQuestion(questions[0], questions[0] === first)])
+	const combineAllQuestionsLogic = (transpiledQuestions, acc) => {
+		console.log(transpiledQuestions)
+		return !transpiledQuestions.length
+			? acc
+			: combineAllQuestionsLogic(
+					transpiledQuestions.slice(1),
+					transpiledQuestions[0](transpiledQuestions.length === questions.length ? undefined : acc)
+			  )
 	}
-	const combineAllQuestionsLogic = trasnspiledQuestions => {
-		const aux = (trasnspiledQuestions, acc) => {
-			console.log(trasnspiledQuestions)
-			return trasnspiledQuestions.length === 0
-				? acc
-				: aux(
-						trasnspiledQuestions.slice(1),
-						typeof acc === "boolean" ? trasnspiledQuestions[1](acc) : trasnspiledQuestions[0](acc)
-				  )
-		}
-		return aux(trasnspiledQuestions, trasnspiledQuestions[0])
-	}
-	return combineAllQuestionsLogic(aux(questions, []))
+
+	return combineAllQuestionsLogic(aux(questions, []), false)
 }
